@@ -27,16 +27,6 @@ function App() {
 
 
   useEffect(() => {
-   /* const removeOnAccountAvailable = onAccountAvailable(() => {
-      setIsConnected(true);
-      setAddress(getAddress());
-      getBalance();
-    })
-
-    return ()=>{
-      removeOnAccountAvailable()
-    }
-    */
     const removeAccountAvailableListener = onAccountAvailable (() =>{
       setIsConnected(true);
       const key = viewingKeyManager.get(abkt.at); //Get actual viewing key
@@ -102,8 +92,6 @@ function App() {
         onClick={() => { bootstrap(); }}
         disabled={isConnected}>Bootstrap
       </button>
-      <p>Your address is: {address}</p>
-      <p>Your balance is: {coins}</p>
       <p>Your minted tokens:</p>
       <p>Your balance is: {coins}</p>
       <button disabled={!isConnected} onClick={() => { createViewingKey(); }}>{loading ? 'Loading...' : 'Create Viewing Key'}</button>
