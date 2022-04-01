@@ -9,50 +9,103 @@ import {
   viewingKeyManager,
   onViewingKeyCreated,
   enablePermit,
-  hasPermit
+  hasPermit,
+  MintingModule
 
 } from '@stakeordie/griptape.js';
 import { abkt } from "./contracts/labReport"
 import { Componente } from "./component";
+import TokenList from "./components/TokenList"
+import { promises } from "stream";
 
 function App() {
-  // React app 
-  // UseStat('') inicialização vazio
+
   var [address, setAddress] = useState(''); //UseState ele seta a variavel. 1 valor (ultimo valor setado) 2 valor (valor )
   var [coins, setCoins] = useState(undefined);
   var [tokens, setTokens] = useState([]);
   var [balance, setBalance] = useState("");
-  var [vkey, setVKey] = useState('');
 
-  var [isConnected, setIsConnected] = useState(false);
+
   var [isAccountChanged, setIsAccountChanged] = useState(false);
   var [isMessageLoading, setMessageLoading] = useState(false);
   var [isQueryLoading, setQueryLoading] = useState(false);
   var [isPermit, setIsPermit] = useState(false);
+  
+  //Mint Vars
+  var [isConnected, setIsConnected] = useState(false);
 
   var [loading, setLoading] = useState(false);
+  var [loadingMint, setLoadingMint] = useState(false);
+  var [loadingTokens, setLoadingTokens] = useState(false);
   var [loadingBalance, setLoadingBalance] = useState(false);
+  
+  var [nftList, setNftList] = useState('');
+  var [viewingKey, setViewingKey] = useState('');
 
 
   useEffect(() => {
     const removeOnAccountAvailable = onAccountAvailable (() =>{
       setIsConnected(true);
-      hasViewingKey();
-
-      //setIsPermit(hasPermit(abkt));
-    });
-
-    const removeOnViewingKeyCreated = onViewingKeyCreated(() => {      
-      hasViewingKey();
-
-    });
+      const key = viewingKeyManager.get(abkt.at);
+      if(key){
+        setViewingKey(key);
+        console.log(key);
+      }
+    })
 
     return () => {
       removeOnAccountAvailable();
-      removeOnViewingKeyCreated();
     }
   }, []);
+
+  const getTokens = async () => {
+    setLoadingTokens(true);
+    try{
+      const tokens = await abkt.getTokens(null,null,10,true);
+      console.log(tokens);
+      const token_list = tokens.token_list.tokens;
+      await getNftDetail(token_list);
+      
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingTokens(false);
+    }
+  }
   
+  const getNftDetail = async (token_list) => {
+    const promises = token_list.map(token => {
+      return abkt.getNftDossier(token);
+    });
+
+    const result = await Promise.all(promises);
+    const tokens = result
+      .map((ele) => {
+          const { nft_dossier:{ public_metadata } }= ele
+          if(!public_metadata || !public_metadata.extension){
+            return {
+              name:  "",
+              description:  "",
+              image: ""
+            }
+          }
+          const { extension } = public_metadata;
+          const name = extension.name ? extension.name: "";
+          const description = extension.description ? extension.description: "";
+          const image = extension.image ? extension.image: "https://i.picsum.photos/id/551/200/300.jpg?hmac=pXJCWIikY_BiqwhtawBb8x1jxclDny0522ZprZVTJiU";
+          return {
+            name:  name,
+            description:  description,
+            image: image
+          }          
+      });
+      
+    setNftList(tokens);
+  }
+
+
+
+
   async function createViewingKey(){
     setMessageLoading(true);
     try{
@@ -63,19 +116,6 @@ function App() {
     } finally {
       setMessageLoading(false);
       
-    }
-  }
-
-  async function vKey() {
-    if(!hasViewingKey()) return;
-
-    setQueryLoading(true);
-    try{
-      const pkey = viewingKeyManager.get(abkt.at);
-      console.log(pkey);
-      setVKey(pkey);
-    } finally {
-      setMessageLoading(false);
     }
   }
 
@@ -179,10 +219,7 @@ function App() {
         onClick={() => { bootstrap(); }}
         disabled={isConnected}>Bootstrap
       </button>
-      <button
-        onClick={() => { vKey(); }}
-        disabled={!hasViewingKey()}>Show Viewing Key
-      </button>
+      
       <button
         onClick={() => createViewingKey()}
         disabled={
@@ -193,7 +230,7 @@ function App() {
       >
         Create Viewing Key
       </button>
-      <p>{hasViewingKey() ? "Viewing Key " : ""}</p>
+      
     </>
   );
 }
