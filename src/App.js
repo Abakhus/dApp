@@ -22,7 +22,7 @@ function App() {
   var [coins, setCoins] = useState(undefined);
   var [tokens, setTokens] = useState([]);
   var [balance, setBalance] = useState("");
-  var [vkey, setVKey] = useState("");
+  var [vkey, setVKey] = useState('');
 
   var [isConnected, setIsConnected] = useState(false);
   var [isAccountChanged, setIsAccountChanged] = useState(false);
@@ -66,11 +66,17 @@ function App() {
     }
   }
 
-  function vKey() {
-    const Keyx = viewingKeyManager.get(abkt.at);
-    setVKey(Keyx);
-    console.log(vkey);
-    return Keyx;
+  async function vKey() {
+    if(!hasViewingKey()) return;
+
+    setQueryLoading(true);
+    try{
+      const pkey = viewingKeyManager.get(abkt.at);
+      console.log(pkey);
+      setVKey(pkey);
+    } finally {
+      setMessageLoading(false);
+    }
   }
 
 
@@ -172,6 +178,10 @@ function App() {
       <button
         onClick={() => { bootstrap(); }}
         disabled={isConnected}>Bootstrap
+      </button>
+      <button
+        onClick={() => { vKey(); }}
+        disabled={!hasViewingKey()}>Show Viewing Key
       </button>
       <button
         onClick={() => createViewingKey()}
