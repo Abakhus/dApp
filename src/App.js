@@ -7,6 +7,7 @@ import {
   coinConvert,
   onAccountChange,
   viewingKeyManager,
+  viewingKeyManager
 
 } from '@stakeordie/griptape.js';
 import { abkt } from "./contracts/labReport"
@@ -17,37 +18,65 @@ function App() {
   // UseStat('') inicialização vazio
   var [address, setAddress] = useState(''); //UseState ele seta a variavel. 1 valor (ultimo valor setado) 2 valor (valor )
   var [coins, setCoins] = useState(undefined);
-  var [isConnected, setIsConnected] = useState(false);
   var [tokens, setTokens] = useState([]);
+  var [balance, setBalance] = useState("");
+
+  var [isConnected, setIsConnected] = useState(false);
   var [isAccountChanged, setIsAccountChanged] = useState(false);
+  var [isMessageLoading, setMessageLoading] = useState(false);
+  var [isQueryLoading, setQueryLoading] = useState(false);
+
   var [haveViewKey, setViewKey] = useState(false);
   var [viewingKey, setViewingKey] = useState('');
   var [loading, setLoading] = useState(false);
 
-
-
   useEffect(() => {
-    const removeAccountAvailableListener = onAccountAvailable (() =>{
+    const removeOnAccountAvailable = onAccountAvailable (() =>{
       setIsConnected(true);
-      const key = viewingKeyManager.get(abkt.at); //Get actual viewing key
+      hasViewingKey();
+      /*/const key = viewingKeyManager.get(abkt.at); //Get actual viewing key
       if(key){
         setViewingKey(key);
         getBalance();
-      }
+      }*/
     });
 
-    const removeAccountChangeListener = onAccountChange(() => {
-      alert("You have changed your account, please refresh.");
-      setIsAccountChanged(false);
+    const removeOnViewingKeyCreated = onViewingKeyCreated(() => {
+      hasViewingKey();
     });
 
-    return ()=> {
-      removeAccountAvailableListener();
-      removeAccountChangeListener();
-    }//*/
+    return () => {
+      removeOnAccountAvailable();
+      removeOnViewingKeyCreated();
+    }
   }, []);
 
-  const createViewingKey = async () =>{
+  async function createViewingKey() {
+    setMessageLoading(true);
+
+    try{
+      const result = await abkt.createViewingKey();
+      if(result.isEmpty()) return;
+      const { create_viewing_key: { key } } = result.parse();
+      viewingKeyManager.add(abkt, key);
+      
+    } finally {
+      setMessageLoading(false);
+    }
+  }
+
+  function hasViewingKey() {
+    const key = viewingKeyManager.get(abkt.at);
+    return typeof key !== "undefined";
+  }
+
+  async function getBalance(){
+    if (!hasViewingKey()) return;
+    setQueryLoading
+  }
+
+
+  /*const createViewingKey = async () =>{
 
     setLoading(true);
     try{
@@ -71,7 +100,7 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }
+  }*/
 
   const getBalance = async () => {
    const key = viewingKeyManager.get(abkt.at);
