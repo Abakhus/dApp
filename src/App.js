@@ -53,7 +53,7 @@ function App() {
   }, []);
 
   function hasViewingKey() {
-    const key = viewingKeyManager.get(sscrt.at);
+    const key = viewingKeyManager.get(abkt.at);
     return typeof key !== "undefined";
   }
 
