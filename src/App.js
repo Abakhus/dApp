@@ -18,7 +18,7 @@ import TokenList from "./components/TokenList"
 
 function App() {
 
-  var [address, setAddress] = useState(''); //UseState ele seta a variavel. 1 valor (ultimo valor setado) 2 valor (valor )
+  var [address, setAddress] = useState(''); 
   var [coins, setCoins] = useState(undefined);
   var [tokens, setTokens] = useState([]);
   var [balance, setBalance] = useState("");
@@ -52,10 +52,15 @@ function App() {
     }
   }, []);
 
+  function hasViewingKey() {
+    const key = viewingKeyManager.get(sscrt.at);
+    return typeof key !== "undefined";
+  }
+
   const getTokens = async () => {
     setLoadingTokens(true);
     try {
-      const tokens = await abkt.getTokens(null,null,10,true);
+      const tokens = await abkt.getTokens(null,null,15,true);
       console.log(tokens)
       const token_list = tokens.token_list.tokens;
       await getNftDetail(token_list);
@@ -67,6 +72,7 @@ function App() {
   }
   
   const getNftDetail = async (token_list) => {
+    //abkt.setGlobalApproval(8, 'all', 'all');
     const promises = token_list.map(token => {
       return abkt.getNftDossier(token);
     });
@@ -75,6 +81,7 @@ function App() {
     const tokens = result
       .map((ele) => {
           const { nft_dossier:{ public_metadata } }= ele
+          console.log(ele);
           if(!public_metadata || !public_metadata.extension){
             return {
               name:  "",
@@ -82,6 +89,7 @@ function App() {
               image: ""
             }
           }
+          //console.log(public_metadata);
           const { extension } = public_metadata;
           const name = extension.name ? extension.name: "";
           const description = extension.description ? extension.description: "";
@@ -89,7 +97,7 @@ function App() {
           return {
             name:  name,
             description:  description,
-            image: image
+            image: ""
           }          
       });
       
@@ -100,13 +108,19 @@ function App() {
   const mint = async () => {
     var date = Date.now();
     const extension = {
-      name: `Example ${date}`,
-      description: "test",
-      image: 'https://i.picsum.photos/id/586/200/300.jpg?hmac=Ugf94OPRVzdbHxLu5sunf4PTa53u3gDVzdsh5jFCwQE'
-    
+      name: `Attribute ${date}`,
+      description: "Attribute Test",
+      image: 'https://i.picsum.photos/id/586/200/300.jpg?hmac=Ugf94OPRVzdbHxLu5sunf4PTa53u3gDVzdsh5jFCwQE',
+      attributes: [{
+        "trait_type": "Trait Type",
+        "value": "Value"
+      },{
+        "Status": "Propriety Test"
+      }]
     }
     setLoadingMint(true);
     try {
+      //console.log(extension + "Extension");
       await abkt.mintNft(null,null,{extension});
     } catch (e) {
       // ignore for now
@@ -141,8 +155,9 @@ function App() {
 
   return (
     <>
-      <h1>Hello, Mint!</h1>
+      <h1>Abk Core</h1>
       <p>Is connected? {isConnected ? "Yes" : "No"}</p>
+      <p>Has Viewing Key? {hasViewingKey() ? "Yes": "No"}</p>
       <button
         onClick={() => { bootstrap(); }}
         disabled={isConnected}>Bootstrap
