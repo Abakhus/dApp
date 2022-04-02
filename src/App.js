@@ -107,15 +107,23 @@ function App() {
 
   const mint = async () => {
     var date = Date.now();
+    
     const extension = {
       name: `Attribute ${date}`,
-      description: "Attribute Test",
+      description: "Attribute Test 5",
       image: 'https://i.picsum.photos/id/586/200/300.jpg?hmac=Ugf94OPRVzdbHxLu5sunf4PTa53u3gDVzdsh5jFCwQE',
       attributes: [{
-        "trait_type": "Trait Type",
-        "value": "Value"
+        "trait_type": "birthdate",
+        "value": "",
       },{
-        "Status": "Propriety Test"
+        "trait_type": "client_name",
+        "value": ""
+      },{
+        "trait_type": "name_test",
+        "value": ""
+      },{
+        "trait_type": "file",
+        "value": ""
       }]
     }
     setLoadingMint(true);
