@@ -60,7 +60,7 @@ function App() {
   const getTokens = async () => {
     setLoadingTokens(true);
     try {
-      const tokens = await abkt.getTokens(null,null,15,true);
+      const tokens = await abkt.getTokens(null,null,20,true);
       console.log(tokens)
       const token_list = tokens.token_list.tokens;
       await getNftDetail(token_list);
@@ -91,6 +91,8 @@ function App() {
           }
           //console.log(public_metadata);
           const { extension } = public_metadata;
+          const trait = extension.attributes ? extension.attributes: "";
+          //console.log(trait[1].value);
           const name = extension.name ? extension.name: "";
           const description = extension.description ? extension.description: "";
           const image = extension.image ? extension.image: "https://i.picsum.photos/id/551/200/300.jpg?hmac=pXJCWIikY_BiqwhtawBb8x1jxclDny0522ZprZVTJiU";
@@ -106,20 +108,19 @@ function App() {
 
 
   const mint = async () => {
-    var date = Date.now();
-    
+    var date = Date.now(); 
     const extension = {
       name: `Attribute ${date}`,
-      description: "Attribute Test 5",
+      description: "Attribute Test 22",
       image: 'https://i.picsum.photos/id/586/200/300.jpg?hmac=Ugf94OPRVzdbHxLu5sunf4PTa53u3gDVzdsh5jFCwQE',
       attributes: [{
         "trait_type": "birthdate",
         "value": "",
       },{
         "trait_type": "client_name",
-        "value": ""
+        "value": "Trait Name"
       },{
-        "trait_type": "name_test",
+        "trait_type": "lab_id",
         "value": ""
       },{
         "trait_type": "file",
@@ -141,7 +142,6 @@ function App() {
     setLoading(true);
     try {
       const result = await abkt.createViewingKey();
-
       if (result.isEmpty()) return;
 
       const { viewing_key: { key } } = result.parse();
