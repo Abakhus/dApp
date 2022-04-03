@@ -15,6 +15,7 @@ import {
 } from '@stakeordie/griptape.js';
 import { abkt } from "./contracts/labReport"
 import TokenList from "./components/TokenList"
+import Ipfs from "./util/Ipfs"
 
 function App() {
 
@@ -96,7 +97,6 @@ function App() {
           //console.log(public_metadata);
           const { extension } = public_metadata;
           const trait = extension.attributes ? extension.attributes: "";
-          //console.log(trait[1].value);
           const name = extension.name ? extension.name: "";
           const description = extension.description ? extension.description: "";
           const image = extension.image ? extension.image: "https://i.picsum.photos/id/551/200/300.jpg?hmac=pXJCWIikY_BiqwhtawBb8x1jxclDny0522ZprZVTJiU";
@@ -206,12 +206,13 @@ function App() {
       </form>
       <button disabled={!isConnected} onClick={() => { mint(); }}>{loadingMint ? 'Loading...' : 'Mint'}</button>  
       <hr></hr>
-      <br></br>
-      <br></br>
-      
-      <br></br>
       <button disabled={!isConnected} onClick={() => { createViewingKey(); }}>{loading ? 'Loading...' : 'Create Viewing Key'}</button>
       <button disabled={!isConnected || !viewingKey}  onClick={() => { getTokens(); }}>{loadingTokens ? 'Loading...' : 'Get Tokens'}</button>
+      <hr></hr>
+      <br></br>
+      <br></br>
+      {Ipfs()}
+      <br></br>
       <br></br>
       <TokenList nftList={nftList} />
     </>
