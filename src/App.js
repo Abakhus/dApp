@@ -15,7 +15,10 @@ import {
 } from '@stakeordie/griptape.js';
 import { abkt } from "./contracts/labReport"
 import TokenList from "./components/TokenList"
-import Ipfs from "./util/Ipfs"
+import { create } from 'ipfs-http-client'
+
+const ipfsClient = create('https://ipfs.infura.io:5001/api/v0');
+
 
 function App() {
 
@@ -30,12 +33,14 @@ function App() {
   var [isQueryLoading, setQueryLoading] = useState(false);
   var [isPermit, setIsPermit] = useState(false);
   var [loadingBalance, setLoadingBalance] = useState(false);
+
   //token vars
   var [name, setName] = useState("");
   var [birthdate, setBirthdate] = useState("");
   var [labID, setLabID] = useState("");
 
   //Mint Vars
+  var [fileUrl, updateFileUrl] = useState(``);
   var [loading, setLoading] = useState(false);
   var [loadingMint, setLoadingMint] = useState(false);
   var [loadingTokens, setLoadingTokens] = useState(false);
@@ -60,6 +65,18 @@ function App() {
   function hasViewingKey() {
     const key = viewingKeyManager.get(abkt.at);
     return typeof key !== "undefined";
+  }
+
+  async function ipfsUpload(e) {
+    const file = e.target.files[0]
+    try {
+      const added = await ipfsClient.add(file)
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      updateFileUrl(url);
+      console.log(url);
+    } catch (error) {
+      console.log('Error uploading file: ', error)
+    }  
   }
 
   const getTokens = async () => {
@@ -129,7 +146,7 @@ function App() {
         "value": `${labID}`
       },{
         "trait_type": "file",
-        "value": ""
+        "value": `${fileUrl}`
       }]
     }
     setLoadingMint(true);
@@ -211,7 +228,13 @@ function App() {
       <hr></hr>
       <br></br>
       <br></br>
-      {Ipfs()}
+      <div>
+      <h1>IPFS Upload</h1>
+        <input
+          type="file"
+          onChange={ipfsUpload}
+        />
+      </div>
       <br></br>
       <br></br>
       <TokenList nftList={nftList} />
