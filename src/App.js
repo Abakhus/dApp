@@ -29,9 +29,12 @@ function App() {
   var [isQueryLoading, setQueryLoading] = useState(false);
   var [isPermit, setIsPermit] = useState(false);
   var [loadingBalance, setLoadingBalance] = useState(false);
-
+  //token vars
   var [name, setName] = useState("");
-   //Mint Vars
+  var [birthdate, setBirthdate] = useState("");
+  var [labID, setLabID] = useState("");
+
+  //Mint Vars
   var [loading, setLoading] = useState(false);
   var [loadingMint, setLoadingMint] = useState(false);
   var [loadingTokens, setLoadingTokens] = useState(false);
@@ -117,13 +120,13 @@ function App() {
       image: 'https://i.picsum.photos/id/586/200/300.jpg?hmac=Ugf94OPRVzdbHxLu5sunf4PTa53u3gDVzdsh5jFCwQE',
       attributes: [{
         "trait_type": "birthdate",
-        "value": "",
+        "value": `${birthdate}`
       },{
         "trait_type": "client_name",
         "value": `${name}`
       },{
         "trait_type": "lab_id",
-        "value": ""
+        "value": `${labID}`
       },{
         "trait_type": "file",
         "value": ""
@@ -172,18 +175,40 @@ function App() {
         onClick={() => { bootstrap(); }}
         disabled={isConnected}>Bootstrap
       </button>
-      <button disabled={!isConnected} onClick={() => { mint(); }}>{loadingMint ? 'Loading...' : 'Mint'}</button>
-      <br></br>
-      <br></br>
+      <p></p>
+      <hr></hr>
       <form>
-      <label>Enter your name:  
-        <input
-          type="text" 
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-    </form>
+        <label>Enter your name:  
+          <input
+            type="text" 
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+      </form>
+      <form>
+        <label>Enter your birthdate:  
+          <input
+            type="text" 
+            value={birthdate}
+            onChange={(e) => setBirthdate(e.target.value)}
+          />
+        </label>
+      </form>
+      <form>
+        <label>Lab ID:  
+          <input
+            type="text" 
+            value={labID}
+            onChange={(e) => setLabID(e.target.value)}
+          />
+        </label>
+      </form>
+      <button disabled={!isConnected} onClick={() => { mint(); }}>{loadingMint ? 'Loading...' : 'Mint'}</button>  
+      <hr></hr>
+      <br></br>
+      <br></br>
+      
       <br></br>
       <button disabled={!isConnected} onClick={() => { createViewingKey(); }}>{loading ? 'Loading...' : 'Create Viewing Key'}</button>
       <button disabled={!isConnected || !viewingKey}  onClick={() => { getTokens(); }}>{loadingTokens ? 'Loading...' : 'Get Tokens'}</button>
