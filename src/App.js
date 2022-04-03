@@ -137,6 +137,27 @@ function App() {
       name: `Attribute ${date}`,
       description: "Attribute Test 22",
       image: 'https://i.picsum.photos/id/586/200/300.jpg?hmac=Ugf94OPRVzdbHxLu5sunf4PTa53u3gDVzdsh5jFCwQE',
+      attributes: [
+        {
+          "trait_type": "genolab_test_code",
+          "value": ""
+        },
+        {
+          "trait_type": "lab_id",
+          "value": ""
+        },
+        {
+          "trait_type": "delivery_date",
+          "value": ""
+        } 
+     ],
+     "protected_attributes":[
+      "birthdate",
+      "client_name",
+      "name_test"
+     ] 
+    }
+    const pMetadata = {
       attributes: [{
         "trait_type": "birthdate",
         "value": `${birthdate}`
@@ -144,7 +165,7 @@ function App() {
         "trait_type": "client_name",
         "value": `${name}`
       },{
-        "trait_type": "lab_id",
+        "trait_type": "name_test",
         "value": `${labID}`
       },{
         "trait_type": "file",
@@ -154,7 +175,7 @@ function App() {
     setLoadingMint(true);
     try {
       //console.log(extension + "Extension");
-      await abkt.mintNft(null,null,{extension});
+      await abkt.mintNft(null,null,{extension}, {pMetadata});
     } catch (e) {
       // ignore for now
     } finally {
