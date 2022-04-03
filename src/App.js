@@ -30,7 +30,8 @@ function App() {
   var [isPermit, setIsPermit] = useState(false);
   var [loadingBalance, setLoadingBalance] = useState(false);
 
-  //Mint Vars
+  var [name, setName] = useState("");
+   //Mint Vars
   var [loading, setLoading] = useState(false);
   var [loadingMint, setLoadingMint] = useState(false);
   var [loadingTokens, setLoadingTokens] = useState(false);
@@ -99,7 +100,8 @@ function App() {
           return {
             name:  name,
             description:  description,
-            image: ""
+            image: "",
+            trait: trait
           }          
       });
       
@@ -118,7 +120,7 @@ function App() {
         "value": "",
       },{
         "trait_type": "client_name",
-        "value": "Trait Name"
+        "value": `${name}`
       },{
         "trait_type": "lab_id",
         "value": ""
@@ -172,6 +174,16 @@ function App() {
       </button>
       <button disabled={!isConnected} onClick={() => { mint(); }}>{loadingMint ? 'Loading...' : 'Mint'}</button>
       <br></br>
+      <br></br>
+      <form>
+      <label>Enter your name:  
+        <input
+          type="text" 
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+    </form>
       <br></br>
       <button disabled={!isConnected} onClick={() => { createViewingKey(); }}>{loading ? 'Loading...' : 'Create Viewing Key'}</button>
       <button disabled={!isConnected || !viewingKey}  onClick={() => { getTokens(); }}>{loadingTokens ? 'Loading...' : 'Get Tokens'}</button>
