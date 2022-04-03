@@ -76,7 +76,9 @@ function App() {
       console.log(url);
     } catch (error) {
       console.log('Error uploading file: ', error)
-    }  
+    }  finally {
+
+    }
   }
 
   const getTokens = async () => {
@@ -234,6 +236,7 @@ function App() {
           type="file"
           onChange={ipfsUpload}
         />
+        {fileUrl && (<p>Success uploading! <a href={fileUrl}>file</a></p>)}
       </div>
       <br></br>
       <br></br>
