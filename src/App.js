@@ -136,7 +136,7 @@ function App() {
     const extension = {
       name: `Attribute ${date}`,
       description: "Attribute Test 22",
-      image: 'https://i.picsum.photos/id/586/200/300.jpg?hmac=Ugf94OPRVzdbHxLu5sunf4PTa53u3gDVzdsh5jFCwQE',
+      image: `${fileUrl}`,
       attributes: [
         {
           "trait_type": "genolab_test_code",
