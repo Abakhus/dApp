@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MyTokens from './pages/MyTokens'
 import Home from './pages'
-import { abkt }  from './pages/contracts/labReport'
 
 function App() {
 

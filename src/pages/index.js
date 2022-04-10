@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
 	bootstrap,
-	getAddress,
 	onAccountAvailable,
-	getNativeCoinBalance,
-	coinConvert,
-	onAccountChange,
 	viewingKeyManager,
-	onViewingKeyCreated,
-	enablePermit,
-	hasPermit,
-	MintingModule
-
   } from '@stakeordie/griptape.js';
 
 import { abkt } from './contracts/labReport'
 import { create } from 'ipfs-http-client'
 
 const Home = () => {
-	var [isConnected, setIsConnected] = useState(false);
+	const [isConnected, setIsConnected] = useState(false);
 	var [viewingKey, setViewingKey] = useState('');
 	const [currentAccount, setCurrentAccount] = useState(null);
 	var [loading, setLoading] = useState(false);
@@ -32,8 +23,6 @@ const Home = () => {
 		setLoading(true);
 		try {
 		  const result = await abkt.createViewingKey();
-		  console.log(result);
-		  console.log("try")
 		  if (result.isEmpty()) return;
 			const { viewing_key: { key } } = result.parse();
 			viewingKeyManager.add(abkt, key);
@@ -54,39 +43,49 @@ const Home = () => {
 
 	const connectWalletHandler = async () => {
 		try{
-			bootstrap()
-			setIsConnected(true)
+			bootstrap();
 		}
 		catch(err){
-			console.log(err)
+			console.log(err);
+			setIsConnected(false);
 		}
 	}
 
-	const mintNftHandler = () => { }
-
 	const connectWalletButton = () => {
 		return (
-		<button onClick={connectWalletHandler} className='cta-button connect-wallet-button'>
+		<button onClick={ connectWalletHandler } className='cta-button connect-wallet-button'>
 			{isConnected ? "Connected" : "Connect Wallet"}
 		</button>
 		)
 	}
 
 	const mintNftButton = () => {
-		return (
-		<button onClick={createViewingKey} className='cta-button mint-nft-button'>
-			{loading ? "Loading" : "Create Viewing Key"}
-		</button>
-		)
+		if(hasViewingKey()){
+			return (
+				<div>
+					<p>You already have a Viewing Key.</p>
+					<p>Contract address: {abkt.at}</p>
+				</div>
+			)
+		}else {
+			return (
+				<button onClick={createViewingKey} disabled={hasViewingKey()} className='cta-button mint-nft-button'>
+					{loading ? "Loading" : "Create Viewing Key"}
+				</button>
+				)
+		}
+	
 	}
 
 	useEffect(() => {
 		const removeOnAccountAvailable = onAccountAvailable (() => {
 			const key = viewingKeyManager.get(abkt.at);
+			setIsConnected(true)
 			if(key){
 				setViewingKey(key);
 			}
 		})
+		
 		return () => {
 			removeOnAccountAvailable();
 		}
@@ -101,13 +100,10 @@ const Home = () => {
 			height: '100vh'
 		}}
 		className='main-app'>
-		<h4>Connect to Keplr Wallet</h4>
 			<div className='main-app'>
-		 		<h1>Abakhus</h1>
 				<div>
 				{isConnected ? mintNftButton() : connectWalletButton()}
-				<br></br>
-				{hasViewingKey() ? "Have viewing key" : "No viewing key created" }
+				
 				</div>
 	   		</div>
 		</div>

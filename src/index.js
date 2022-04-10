@@ -8,6 +8,7 @@ import {
 } from '@stakeordie/griptape.js';
 
 const restUrl = 'https://api.pulsar.griptapejs.com';
+
 const provider = getKeplrAccountProvider();
 
 function runApp() {
