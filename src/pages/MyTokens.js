@@ -30,24 +30,26 @@ const getNftDetail = async (token_list) => {
 	});
   }
 
-const getTokens = async () =>{
-	setLoadingTokens(true);
-		try {
-		//Get list of tokens' id owned
-		// Exam. ["4","65","87"]
-		const tokens = await abkt.getTokens(null,null,10,true);
-		const token_list = tokens.token_list.tokens;
-		console.log(tokens);
-		//Get details of each token
-		await getNftDetail(token_list);
-	} catch (e) {
-		console.error(e)
-	} finally {
-		setLoadingTokens(false);
+	const getTokens = async () =>{
+		setLoadingTokens(true);
+			try {
+			//Get list of tokens' id owned
+			// Exam. ["4","65","87"]
+			const tokens = await abkt.getTokens(null,null,10,true);
+			const token_list = tokens.token_list.tokens;
+			console.log(tokens);
+			//Get details of each token
+			await getNftDetail(token_list);
+		} catch (e) {
+			console.error(e)
+		} finally {
+			setLoadingTokens(false);
+		}
 	}
-}
+	
 	useEffect(() => {
 	  }, []);
+
 	const nftInfo = [
 		{
 			file : "",
@@ -80,16 +82,19 @@ const getTokens = async () =>{
 	
 
 	return (
-		<div style={{
+		<div
+		style={{
+			display: 'flex',
 			justifyContent: 'Center',
-			alignItems: 'Center',
+			alignItems: 'Top',
+			height: '100vh'
 		}}>
-		  <h4>How to use CardComponent in ReactJS?</h4>
 		  <Card
-			style={{
-			  width: 400,
-			  backgroundColor: "yellow",
-			}}
+		  style={{
+			width: 400,
+			height: 200,
+			backgroundColor: "grey",
+		  }}
 		  >
 			<CardContent>
 			  <Typography
@@ -97,10 +102,10 @@ const getTokens = async () =>{
 				color="textSecondary"
 				gutterBottom
 			  >
-				Greetings of the day
+				Genolab Test Code
 			  </Typography>
 			  <Typography variant="h5" component="h2">
-				How are you ?
+				Delivery Date
 			  </Typography>
 			  <Typography
 				style={{
@@ -108,56 +113,20 @@ const getTokens = async () =>{
 				}}
 				color="textSecondary"
 			  >
-				Keep Motivated
+				.
 			  </Typography>
 			  <Typography variant="body2" component="p">
-				Stay Happy
+				.
 			  </Typography>
 			</CardContent>
 			<CardActions>
 			  <Button 
 			  onClick={() => { getTokens(); } } 
-			  size="small">Stay Safe.....</Button>
+			  size="small">Private Data</Button>
 			</CardActions>
 		  </Card>
 		</div>
 	  );
-	
-		/*return (
-			<Card style={{ width: "18rem" }} key={index} className="box">
-			<Card.Img variant="top" src="holder.js/100px180" src={card.image} />
-			<Card.Body>
-			  <Card.Title>{card.title}</Card.Title>
-			  <Card.Text>{card.text}</Card.Text>
-			</Card.Body>
-		  </Card>
-		);*/
-	  
 };
 
 export default MyTokens;
-/**
- * return (
-		<div
-		style={{
-			display: 'flex',
-			justifyContent: 'Center',
-			alignItems: 'Top',
-			height: '100vh'
-		}}
-		>
-		<h1>My Tokens</h1>
-		<Card style={{ width: '18rem' }}>
-			<Card.Img variant="top" src="holder.js/100px180" />
-			<Card.Body>
-				<Card.Title>Card Title</Card.Title>
-				<Card.Text>
-				Some quick example text to build on the card title and make up the bulk of
-				the card's content.
-				</Card.Text>
-				<Button variant="primary">Go somewhere</Button>
-			</Card.Body>
-		</Card>
-		</div>
-	);
- */
