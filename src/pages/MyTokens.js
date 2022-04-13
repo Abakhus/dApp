@@ -6,14 +6,50 @@ import Button from "@material-ui/core/Button";
 import CardActions from "@material-ui/core/CardActions";
 import './Box.css'
 import { abkt } from './contracts/labReport';
+import {
+	bootstrap,
+	onAccountAvailable,
+	viewingKeyManager,
+  } from '@stakeordie/griptape.js';
 
 // return minting.getNftDossier(token,false,true);  retornar os dados da token por completo
-
+// Viewing Key deve ser requisitada aqui
+// Private Metadata deve aparecer pelo botão +
+// Ter link p/ arquivo no IPFS | Jackal > abrir numa nova guia
+// getTokens // nftDossier -> viewing key = private metadata (toker owner only)
 
 const MyTokens = () => {
 
 var [loadingTokens, setLoadingTokens] = useState(false);
 var [tokens, setTokens] = useState([]);
+var [viewingKey, setViewingKey] = useState('');
+var [loading, setLoading] = useState(false);
+
+function hasViewingKey() {
+	const key = viewingKeyManager.get(abkt.at);
+	return typeof key !== "undefined";
+}
+
+const createViewingKey = async () => {
+	setLoading(true);
+	try {
+	  const result = await abkt.createViewingKey();
+	  if (result.isEmpty()) return;
+		const { viewing_key: { key } } = result.parse();
+		viewingKeyManager.add(abkt, key);
+		setViewingKey(key);
+		const currentKey = viewingKeyManager.get(abkt.at);
+	  if (currentKey) {
+		viewingKeyManager.set(abkt, key);
+	  } else {
+		viewingKeyManager.add(abkt, key);
+	  }
+	} catch (e) {
+	  // ignore for now
+	} finally {
+	  setLoading(false);
+	}
+}
 
 const getNftDetail = async (token_list) => {
 	const promises = token_list.map(token => {
@@ -48,6 +84,17 @@ const getNftDetail = async (token_list) => {
 	}
 	
 	useEffect(() => {
+		const removeOnAccountAvailable = onAccountAvailable (() => { //setar viewing key caso já exista
+			const key = viewingKeyManager.get(abkt.at);
+			
+			if(key){
+				setViewingKey(key);
+			}
+		})
+		
+		return () => {
+			removeOnAccountAvailable();
+		}
 	  }, []);
 
 	const nftInfo = [
@@ -122,7 +169,7 @@ const getNftDetail = async (token_list) => {
 			<CardActions>
 			  <Button 
 			  onClick={() => { getTokens(); } } 
-			  size="small">Private Data</Button>
+			  size="small">+</Button>
 			</CardActions>
 		  </Card>
 		</div>
