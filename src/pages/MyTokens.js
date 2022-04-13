@@ -24,7 +24,7 @@ const getNftDetail = async (token_list) => {
 	const result = await Promise.all(promises);
 	console.log(result);
 	// console.log('result: ', result);
-	this.tokens = result.map((ele, idx) => {
+	setTokens = result.map((ele, idx) => {
 	  ele['nft_dossier']['index'] = `${token_list[idx]}`;
 	  return ele['nft_dossier'];
 	});
@@ -39,7 +39,7 @@ const getTokens = async () =>{
 		const token_list = tokens.token_list.tokens;
 		console.log(tokens);
 		//Get details of each token
-		await this.getNftDetail(token_list);
+		await getNftDetail(token_list);
 	} catch (e) {
 		console.error(e)
 	} finally {
