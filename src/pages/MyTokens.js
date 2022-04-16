@@ -128,8 +128,6 @@ const MyTokens = () => {
 
 	
 
-	
-
 	return (
 		<>
 		<div
@@ -138,15 +136,15 @@ const MyTokens = () => {
 			justifyContent: 'Center',
 			height: '100'
 		}}>
-			<Button onClick = { createViewingKey } variant="outlined">
-				 { hasViewingKey() ? "Create Viewing Key" : "" }
+			<Button onClick = { createViewingKey } variant="outlined" disabled={ hasViewingKey() }>
+				 { hasViewingKey() ? "Viewing Key Already Set" : (loading ? "Creating ..." : "Create Viewing Key") }
 			</Button>
 		</div>
-		<Button onClick = { getTokens } variant="outlined">
-				Get Tokens
+		<Button onClick = { getTokens } disabled={ !hasViewingKey() } variant="outlined">
+				{ loadingTokens ? "Listing Tokens..." : "Get Tokens" } 
 		</Button>
 		<br></br>
-		{ rdy ? <TokenList nftList={tokens} /> : "Nao" }
+		{ rdy ? <TokenList nftList={tokens} /> : "" }
 		</>
 
 	  );
