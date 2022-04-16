@@ -8,7 +8,7 @@ NavBtn,
 NavBtnLink,
 } from './NavbarElements';
 import { onAccountAvailable } from '@stakeordie/griptape.js';
-
+//adicionar navegação dos contratos
 
 const Navbar = () => {
 return (

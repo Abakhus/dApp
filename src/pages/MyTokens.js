@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import CardActions from "@material-ui/core/CardActions";
+
 import './Box.css'
 import { abkt } from './contracts/labReport';
 import {
@@ -12,7 +9,6 @@ import {
   } from '@stakeordie/griptape.js';
 import TokenList from "./TokenList";
 // return minting.getNftDossier(token,false,true);  retornar os dados da token por completo
-// Viewing Key deve ser requisitada aqui
 // Private Metadata deve aparecer pelo botão +
 // Ter link p/ arquivo no IPFS | Jackal > abrir numa nova guia
 // getTokens // nftDossier -> viewing key = private metadata (toker owner only)
@@ -59,16 +55,10 @@ const MyTokens = () => {
 		});
 		
 		const result = await Promise.all(promises);
-		// console.log(result);
-		// console.log('result: ', result);
-		//const tokens = result.map((ele, idx) => {
-		//	ele['nft_dossier']['index'] = `${token_list[idx]}`;
-		//	return ele['nft_dossier'];
-		//  });
 		const tokens = result
 		.map((ele) => {
 			const { nft_dossier:{ public_metadata } }= ele
-			//console.log(ele);
+			console.log(ele);
 			if(!public_metadata || !public_metadata.extension){
 				return {
 				name:  "",
@@ -81,7 +71,7 @@ const MyTokens = () => {
 			const trait = extension.attributes ? extension.attributes: "";
 			const name = extension.name ? extension.name: "";
 			const description = extension.description ? extension.description: "";
-			const image = extension.image ? extension.image: "https://i.picsum.photos/id/551/200/300.jpg?hmac=pXJCWIikY_BiqwhtawBb8x1jxclDny0522ZprZVTJiU";
+			
 			return {
 				name:  name,
 				description:  description,
@@ -136,70 +126,7 @@ const MyTokens = () => {
 		},
 	];
 
-	const cardT = [
-		{
-			image:
-			  "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-			title: "Michael Jordan",
-			text: "Sample Text 1",
-		  },
-		  {
-			image:
-			  "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-			title: "Steph Curry",
-			text: "Sample txt 2",
-		  },
-	]
-
-	const cardPrint = async () => {
-		return (
-			<div
-		style={{
-			display: 'flex',
-			justifyContent: 'Center',
-			alignItems: 'Center',
-			height: '100vh'
-		}}>
-		  <Card
-		  style={{
-			width: 400,
-			height: 200,
-			backgroundColor: "grey",
-		  }}
-		  >
-			<CardContent>
-			  <Typography
-				style={{ fontSize: 14 }}
-				color="textSecondary"
-				gutterBottom
-			  >
-				Genolab Test Code
-			  </Typography>
-			  <Typography variant="h5" component="h2">
-				Delivery Date
-			  </Typography>
-			  <Typography
-				style={{
-				  marginBottom: 12,
-				}}
-				color="textSecondary"
-			  >
-				.
-			  </Typography>
-			  <Typography variant="body2" component="p">
-				.
-			  </Typography>
-			</CardContent>
-			<CardActions>
-			  <Button
-			  variant="contained"
-			  onClick={() => { getTokens(); } } 
-			  size="big">+</Button>
-			</CardActions>
-		  </Card>
-		</div>
-		)
-	}
+	
 
 	
 
