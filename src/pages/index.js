@@ -27,7 +27,7 @@ const Home = () => {
 	const connectWalletButton = () => {
 		return (
 		<button onClick={ connectWalletHandler } className='cta-button connect-wallet-button'>
-			{isConnected ? "Connected" : "Connect Wallet"}
+			Connect
 		</button>
 		)
 	}
@@ -41,7 +41,9 @@ const Home = () => {
 			)
 		}else {
 			return(
-				<></>
+				<div>
+				{ connectWalletButton }
+				</div>
 			)
 		}
 	

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 Nav,
 NavLink,
@@ -7,6 +7,8 @@ NavMenu,
 NavBtn,
 NavBtnLink,
 } from './NavbarElements';
+import { onAccountAvailable } from '@stakeordie/griptape.js';
+
 
 const Navbar = () => {
 return (
