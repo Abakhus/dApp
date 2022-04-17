@@ -8,6 +8,8 @@ import {
 	viewingKeyManager,
   } from '@stakeordie/griptape.js';
 import TokenList from "./TokenList";
+import ContractsNav from './contracts/Navbar/ContractsNav';
+
 // return minting.getNftDossier(token,false,true);  retornar os dados da token por completo
 // Private Metadata deve aparecer pelo botão +
 // Ter link p/ arquivo no IPFS | Jackal > abrir numa nova guia
@@ -66,7 +68,7 @@ const MyTokens = () => {
 				image: ""
 				}
 			}
-			//console.log(public_metadata);
+		
 			const { extension } = public_metadata;
 			const trait = extension.attributes ? extension.attributes: "";
 			const name = extension.name ? extension.name: "";
@@ -76,7 +78,8 @@ const MyTokens = () => {
 				name:  name,
 				description:  description,
 				image: "",
-				trait: trait
+				trait: trait,
+
 			}          
 		});
 		setTokens(tokens);
@@ -130,6 +133,7 @@ const MyTokens = () => {
 
 	return (
 		<>
+		<ContractsNav />
 		<div
 		style={{
 			display: 'flex',
