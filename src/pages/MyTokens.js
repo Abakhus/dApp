@@ -37,6 +37,7 @@ const MyTokens = () => {
 				const { viewing_key: { key } } = result.parse();
 				viewingKeyManager.add(abkt, key);
 				setViewingKey(key);
+				//console.log(key);
 				const currentKey = viewingKeyManager.get(abkt.at);
 			if (currentKey) {
 				viewingKeyManager.set(abkt, key);
@@ -60,6 +61,7 @@ const MyTokens = () => {
 		const tokens = result
 		.map((ele) => {
 			const { nft_dossier:{ public_metadata } }= ele
+			console.log("ELEMENT")
 			console.log(ele);
 			if(!public_metadata || !public_metadata.extension){
 				return {
@@ -92,7 +94,7 @@ const MyTokens = () => {
 			// Exam. ["4","65","87"]
 			const tokens = await abkt.getTokens(null,null,10,true);
 			const token_list = tokens.token_list.tokens;
-			console.log("tokens", tokens);
+			//console.log("tokens", tokens);
 			//Get details of each token
 			await getNftDetail(token_list);
 		} catch (e) {
@@ -110,7 +112,6 @@ const MyTokens = () => {
 				setViewingKey(key);
 			}
 		})
-		
 		return () => {
 			removeOnAccountAvailable();
 		}
@@ -144,7 +145,7 @@ const MyTokens = () => {
 				 { hasViewingKey() ? "Viewing Key Already Set" : (loading ? "Creating ..." : "Create Viewing Key") }
 			</Button>
 		</div>
-		<Button onClick = { getTokens } disabled={ !hasViewingKey() } variant="outlined">
+		<Button onClick = { getTokens } disabled = { !hasViewingKey() } variant="outlined">
 				{ loadingTokens ? "Listing Tokens..." : "Get Tokens" } 
 		</Button>
 		<br></br>

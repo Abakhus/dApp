@@ -7,8 +7,9 @@ import {
   getKeplrAccountProvider
 } from '@stakeordie/griptape.js';
 
-const restUrl = 'https://api.pulsar.griptapejs.com';
-
+const restUrl = 'https://api.pulsar.griptapejs.com/';
+//http://testnet.securesecrets.org:1317/
+//https://api.pulsar.griptapejs.com
 const provider = getKeplrAccountProvider();
 
 function runApp() {

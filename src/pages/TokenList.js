@@ -9,8 +9,8 @@ function TokenList({ nftList }) {
 
     function mapTokens() {
         return nftList.map((item,key) => {
-            console.log(item);
-            console.log(key);
+            //console.log(item);
+            //console.log(key);
             return (
                 <>
                 <br></br>

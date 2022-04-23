@@ -113,6 +113,42 @@ const Tokenize = () => {
           />
         </label>
       </form>
+      <form>
+        <label>Birthdate:  
+          <input
+            type="text" 
+            value={birthdate}
+            onChange={(e) => setBirthdate(e.target.value)}
+          />
+        </label>
+      </form>
+      <form>
+        <label>Client Name:  
+          <input
+            type="text" 
+            value={clientName}
+            onChange={(e) => setClientName(e.target.value)}
+          />
+        </label>
+      </form>
+      <form>
+        <label>Test Name:  
+          <input
+            type="text" 
+            value={nameTest}
+            onChange={(e) => setNameTest(e.target.value)}
+          />
+        </label>
+      </form>
+      <form>
+        <label>File:  
+          <input
+            type="text" 
+            value={file}
+            onChange={(e) => setFile(e.target.value)}
+          />
+        </label>
+      </form>
       <button onClick={() => { mint(); }}>{loadingMint ? 'Loading...' : 'Mint'}</button>  
       
         </>
