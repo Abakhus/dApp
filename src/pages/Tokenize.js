@@ -55,25 +55,28 @@ const Tokenize = () => {
             } 
          ] 
         }
-        const pMetadata = {
-          attributes: [{
-            "trait_type": "birthdate",
-            "value": `${birthdate}`
-          },{
-            "trait_type": "client_name",
-            "value": `${clientName}`
-          },{
-            "trait_type": "name_test",
-            "value": `${nameTest}`
-          },{
-            "trait_type": "file",
-            "value": `${file}`
-          }]
+        const private_metadata = {
+          extension : {
+            attributes: [{
+              "trait_type": "birthdate",
+              "value": `${birthdate}`
+            },{
+              "trait_type": "client_name",
+              "value": `${clientName}`
+            },{
+              "trait_type": "name_test",
+              "value": `${nameTest}`
+            },{
+              "trait_type": "file",
+              "value": `${file}`
+            }]
+          }
         }
+          
         setLoadingMint(true);
         try {
           //console.log(extension + "Extension");
-          await abkt.mintNft(null,null,{extension}, {pMetadata});
+          await abkt.mintNft(null,null,{extension}, private_metadata );
         } catch (e) {
           // ignore for now
         } finally {
