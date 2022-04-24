@@ -24,6 +24,18 @@ const MyTokens = () => {
 	var [loading, setLoading] = useState(false);
 	var [rdy, setRdy] = useState(false);
 
+	useEffect(() => {
+		const removeOnAccountAvailable = onAccountAvailable (() => { //setar viewing key caso já exista
+			const key = viewingKeyManager.get(abkt.at);
+			if(key){
+				setViewingKey(key);
+			}
+		})
+		return () => {
+			removeOnAccountAvailable();
+		}
+	  }, []);
+
 	function hasViewingKey() {
 		const key = viewingKeyManager.get(abkt.at);
 		return typeof key !== "undefined";
@@ -60,14 +72,14 @@ const MyTokens = () => {
 		const result = await Promise.all(promises);
 		const tokens = result
 		.map((ele) => {
-			const { nft_dossier:{ public_metadata } }= ele
-			console.log("ELEMENT")
+			const { nft_dossier: { private_metadata, public_metadata } }= ele
+			//console.log("ELEMENT")
 			console.log(ele);
 			if(!public_metadata || !public_metadata.extension){
 				return {
-				name:  "",
-				description:  "",
-				image: ""
+					name:  "",
+					description:  "",
+					image: ""
 				}
 			}
 		
@@ -76,11 +88,17 @@ const MyTokens = () => {
 			const name = extension.name ? extension.name: "";
 			const description = extension.description ? extension.description: "";
 			
+			
+			const { private_extension } = private_metadata;
+			const exs = private_metadata.extension.attributes;
+			//console.log(exs);
+			//const ptrait = private_extension.attributes;
 			return {
 				name:  name,
 				description:  description,
 				image: "",
 				trait: trait,
+				exs: exs,
 
 			}          
 		});
@@ -104,32 +122,6 @@ const MyTokens = () => {
 			setLoadingTokens(false);
 		}
 	}
-	
-	useEffect(() => {
-		const removeOnAccountAvailable = onAccountAvailable (() => { //setar viewing key caso já exista
-			const key = viewingKeyManager.get(abkt.at);
-			if(key){
-				setViewingKey(key);
-			}
-		})
-		return () => {
-			removeOnAccountAvailable();
-		}
-	  }, []);
-
-	const nftInfo = [
-		{
-			file : "",
-			clientName: "",
-			birthDate: "",
-			nameTest: "",
-			nameLab: "",
-			genolabTestCode: "", //publico
-			deliveryDate: "",    //publico
-			labID: "",			 //publico
-		},
-	];
-
 	
 
 	return (

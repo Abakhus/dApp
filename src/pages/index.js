@@ -11,14 +11,7 @@ import { create } from 'ipfs-http-client'
 
 const Home = () => {
 	const [isConnected, setIsConnected] = useState(false);
-	const [currentAccount, setCurrentAccount] = useState(null);
-	var [loading, setLoading] = useState(false);
 	var [viewingKey, setViewingKey] = useState('');
-
-	function hasViewingKey() {
-		const key = viewingKeyManager.get(abkt.at);
-		return typeof key !== "undefined";
-	}
 
 	const connectWalletHandler = async () => {
 		try{
@@ -39,25 +32,9 @@ const Home = () => {
 		)
 	}
 
-	const buttonUpdate = () => {
-		if(isConnected){
-			return (
-				<div>
-					<p>Wallet is OK :)!</p>
-				</div>
-			)
-		}else {
-			return(
-				<div>
-				{ connectWalletButton }
-				</div>
-			)
-		}
-	
-	}
-
 	useEffect(() => {
 		const removeOnAccountAvailable = onAccountAvailable (() => { //setar viewing key caso já exista
+			setIsConnected(true);
 			const key = viewingKeyManager.get(abkt.at);
 			if(key){
 				setViewingKey(key);

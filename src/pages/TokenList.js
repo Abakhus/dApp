@@ -48,7 +48,7 @@ function TokenList({ nftList }) {
                     <CardActions>
                     <Button
                     variant="contained"
-                    onClick={() => {  } } 
+                    onClick={() => { console.log(item.exs[0].value) } } 
                     size="big">+</Button>
                     </CardActions>
                 </Card>
