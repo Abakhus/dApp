@@ -21,7 +21,7 @@ function TokenList({ nftList }) {
                     setAlt(150);
                 }else{
                     setPdata(true);
-                    setAlt(260);
+                    setAlt(240);
                 }
             }
 
@@ -62,7 +62,11 @@ function TokenList({ nftList }) {
                     >
                         {pdata ? "Client Name: "+item.privateExtension[1].value : ""}<br></br>
                         {pdata ? "Test Name: "+item.privateExtension[2].value : ""}<br></br>
-                        {pdata ? "File URL: "+item.privateExtension[3].value : ""}
+                        {pdata &&
+                        <>
+                        <a target="_blank" href ={item.privateExtension[3].value}>File</a>
+                        </>
+                        }
                     </Typography>
                     </CardContent>
                 </Card>
