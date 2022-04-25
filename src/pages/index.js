@@ -24,14 +24,6 @@ const Home = () => {
 		}
 	}
 
-	const connectWalletButton = () => {
-		return (
-		<button onClick={ connectWalletHandler } className='cta-button connect-wallet-button'>
-			Connect
-		</button>
-		)
-	}
-
 	useEffect(() => {
 		const removeOnAccountAvailable = onAccountAvailable (() => { //setar viewing key caso já exista
 			setIsConnected(true);

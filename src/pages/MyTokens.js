@@ -126,6 +126,7 @@ const MyTokens = () => {
 
 	return (
 		<>
+		<br></br>
 		<ContractsNav />
 		<div
 		style={{
@@ -137,11 +138,24 @@ const MyTokens = () => {
 				 { hasViewingKey() ? "Viewing Key Already Set" : (loading ? "Creating ..." : "Create Viewing Key") }
 			</Button>
 		</div>
+		<br></br>
+		<div
+		style={{
+			display: 'flex',
+			justifyContent: 'Center',
+			height: '100'
+		}}>
 		<Button onClick = { getTokens } disabled = { !hasViewingKey() } variant="outlined">
 				{ loadingTokens ? "Listing Tokens..." : "Get Tokens" } 
 		</Button>
 		<br></br>
-		{ rdy ? <TokenList nftList={tokens} /> : "" }
+		</div>
+		<div class='wrapper'>
+			<div class='box'>
+				{ rdy ? <TokenList nftList={tokens} /> : "" }
+			</div>
+		</div>
+		
 		</>
 
 	  );

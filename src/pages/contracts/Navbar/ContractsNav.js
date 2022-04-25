@@ -21,7 +21,6 @@ export default props => {
       <a className="menu-item" href="/pages/Laboratories">
         Laboratories
       </a>
-
       <a className="menu-item" href="/pages/DataScience">
         Data Science
       </a>

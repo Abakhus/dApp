@@ -4,10 +4,13 @@ import {
  onAccountAvailable,
  viewingKeyManager,
  }from '@stakeordie/griptape.js';
+ import Button from "@material-ui/core/Button";
  import { abkt } from './contracts/labReport';
+ import { create } from 'ipfs-http-client'
+ import './Popup.css'
 
 const Tokenize = () => {
-    var [file, setFile] = useState('');
+    var [fileURL, setFileURL] = useState(``);
     var [clientName, setClientName] = useState('');
     var [birthdate, setBirthdate] = useState('');
     var [nameTest, setNameTest] = useState('');
@@ -15,11 +18,12 @@ const Tokenize = () => {
     var [genolabTestCode, setGenolabTestCode] = useState('');  //publico
     var [deliveryDate, setDeliveryDate] = useState('');       //publico
     var [labID, setLabID] = useState(-1);                    //publico
-
+    var [fileStatus, setFileStatus] = useState(false);
     //
     var [viewingKey, setViewingKey] = useState('');
     var [loadingMint, setLoadingMint] = useState(false);
     var [isConnected, setIsConnected] = useState(false);
+    const ipfsClient = create('https://ipfs.infura.io:5001/api/v0');
 
     useEffect(() =>{
         const removeOnAccountAvailable = onAccountAvailable (() => {
@@ -68,7 +72,7 @@ const Tokenize = () => {
               "value": `${nameTest}`
             },{
               "trait_type": "file",
-              "value": `${file}`
+              "value": `${fileURL}`
             }]
           }
         }
@@ -83,12 +87,26 @@ const Tokenize = () => {
           setLoadingMint(false);
         }
       }
-
+      async function ipfsUpload(e) {
+        const file = e.target.files[0]
+        try {
+          const added = await ipfsClient.add(file)
+          const url = `https://ipfs.infura.io/ipfs/${added.path}`
+          //setFile(url);
+          console.log(url);
+          setFileURL(url);
+        } catch (error) {
+          console.log('Error uploading file: ', error)
+        }  finally {
+          setFileStatus(true);
+        }
+      }
 
     return (
         <>
+        
         <ContractsNav />
-        Mint
+        <div className='sp' >
         <form>
         <label>Genolab Test Code:  
           <input
@@ -146,15 +164,22 @@ const Tokenize = () => {
       <form>
         <label>File:  
           <input
-            type="text" 
-            value={file}
-            onChange={(e) => setFile(e.target.value)}
+            type="file"
+            onChange={ipfsUpload}
           />
         </label>
       </form>
-      <button onClick={() => { mint(); }}>{loadingMint ? 'Loading...' : 'Mint'}</button>  
-      
-        </>
+      <br></br>
+      <p>
+      <Button variant="contained" onClick={ () => { mint(); } } disabled={ !fileStatus } className='cta-button mint-nft-button'>
+        {loadingMint ? 'Minting...' : 'Mint'}
+      </Button>
+      <br></br>
+      {!fileStatus && 
+      "Upload a file to mint!" } 
+      </p>
+      </div>
+      </>
     )
 
 }

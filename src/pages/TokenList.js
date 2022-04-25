@@ -4,6 +4,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import PopupPData from "./PopupPData";
+import './Popup.css'
 
 function TokenList({ nftList }) {
 
@@ -46,6 +48,7 @@ function TokenList({ nftList }) {
                     </Typography>
                     </CardContent>
                     <CardActions>
+                    
                     <Button
                     variant="contained"
                     onClick={() => { console.log(item.exs[0].value) } } 
