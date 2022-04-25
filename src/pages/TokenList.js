@@ -57,7 +57,6 @@ function TokenList({ nftList }) {
                     size="medium">{pdata ? "-": "+"}</Button>
                     </CardActions>
                     <Typography
-                        color="black"
                         component="det"
                     >
                         {pdata ? "Client Name: "+item.privateExtension[1].value : ""}<br></br>

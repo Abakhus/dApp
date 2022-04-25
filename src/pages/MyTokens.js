@@ -150,8 +150,8 @@ const MyTokens = () => {
 		</Button>
 		<br></br>
 		</div>
-		<div class='wrapper'>
-			<div class='box'>
+		<div className='wrapper'>
+			<div className='box'>
 				{ rdy ? <TokenList nftList={tokens} /> : "" }
 			</div>
 		</div>
