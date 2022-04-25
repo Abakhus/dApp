@@ -76,11 +76,13 @@
 
   .box {
     display: flex;
-    justify-content: center;
     column-gap: 10px;
     row-gap: 1em;
+    grid-column: 1 / 4;
+    flex-wrap: wrap;
   }
 
   .wrapper {
-    display: grid;  
+    display: grid;
+    grid-column: 1 / 4;
   }
