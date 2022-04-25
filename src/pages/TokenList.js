@@ -54,7 +54,7 @@ function TokenList({ nftList }) {
                     variant="contained"
                     gutterBottom
                     onClick={() => { popup() } } 
-                    size="large">{pdata ? "-": "+"}</Button>
+                    size="medium">{pdata ? "-": "+"}</Button>
                     </CardActions>
                     <Typography
                         color="black"
