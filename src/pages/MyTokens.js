@@ -89,8 +89,8 @@ const MyTokens = () => {
 			const description = extension.description ? extension.description: "";
 			
 			
-			const { private_extension } = private_metadata;
-			const exs = private_metadata.extension.attributes;
+			
+			const privateExtension = private_metadata.extension.attributes;
 			//console.log(exs);
 			//const ptrait = private_extension.attributes;
 			return {
@@ -98,7 +98,7 @@ const MyTokens = () => {
 				description:  description,
 				image: "",
 				trait: trait,
-				exs: exs,
+				privateExtension: privateExtension,
 
 			}          
 		});

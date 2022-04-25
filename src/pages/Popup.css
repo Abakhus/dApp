@@ -40,6 +40,11 @@
     text-align: center;
   }
 
+  det {
+    /* Center horizontally*/
+    text-align: left;
+  }
+
   .cta-button {
     padding: 15px;
     border: none;
@@ -52,10 +57,10 @@
 
   .sp {
     /* Center horizontally*/
-    margin: px;
+    
     right: calc(40%);
     top: calc(150px);
-    text-align: center;
+    text-align: justify;
     font-size: 20px;
     position: fixed;
   }

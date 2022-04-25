@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import PopupPData from "./PopupPData";
-import './Popup.css'
 
 function TokenList({ nftList }) {
 
@@ -13,15 +12,27 @@ function TokenList({ nftList }) {
         return nftList.map((item,key) => {
             //console.log(item);
             //console.log(key);
+            var [alt, setAlt] = useState(150);
+            var [pdata, setPdata] = useState(false);
+
+            const popup = async () =>{
+                if(pdata){
+                    setPdata(false);
+                    setAlt(150);
+                }else{
+                    setPdata(true);
+                    setAlt(260);
+                }
+            }
+
             return (
                 <>
                 <br></br>
                 <div key={key}>
                 <Card
                 style={{
-                    width: 400,
-                    height: 200,
-                    backgroundColor: "grey",
+                    width: 430,
+                    height: alt,
                 }}
                 >
                     <CardContent>
@@ -32,28 +43,28 @@ function TokenList({ nftList }) {
                     >
                         Genolab Test Code: { item.trait[0].value }
                     </Typography>
-                    <Typography variant="h5" component="h2">
+                    <Typography variant="h5" component="p">
                         Delivery Date: { item.trait[2].value }
-                    </Typography>
-                    <Typography
-                        style={{
-                        marginBottom: 12,
-                        }}
-                        color="textSecondary"
-                    >
-                        
                     </Typography>
                     <Typography variant="body2" component="p">
                         Lab ID: { item.trait[1].value }
                     </Typography>
-                    </CardContent>
-                    <CardActions>
-                    
+                    <CardActions>                    
                     <Button
                     variant="contained"
-                    onClick={() => { console.log(item.exs[0].value) } } 
-                    size="big">+</Button>
+                    gutterBottom
+                    onClick={() => { popup() } } 
+                    size="large">{pdata ? "-": "+"}</Button>
                     </CardActions>
+                    <Typography
+                        color="black"
+                        component="det"
+                    >
+                        {pdata ? "Client Name: "+item.privateExtension[1].value : ""}<br></br>
+                        {pdata ? "Test Name: "+item.privateExtension[2].value : ""}<br></br>
+                        {pdata ? "File URL: "+item.privateExtension[3].value : ""}
+                    </Typography>
+                    </CardContent>
                 </Card>
                   <br></br>
                 </div>
