@@ -53,8 +53,8 @@
   .sp {
     /* Center horizontally*/
     margin: px;
-    text-align: justify;
     right: calc(40%);
+    top: calc(150px);
     text-align: center;
     font-size: 20px;
     position: fixed;
