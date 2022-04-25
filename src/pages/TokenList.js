@@ -41,10 +41,10 @@ function TokenList({ nftList }) {
                         color="textSecondary"
                         gutterBottom
                     >
-                        Genolab Test Code: { item.trait[0].value }
+                        Test ID: { item.trait[0].value }
                     </Typography>
                     <Typography variant="h5" component="p">
-                        Delivery Date: { item.trait[2].value }
+                        Available Date: { item.trait[2].value }
                     </Typography>
                     <Typography variant="body2" component="p">
                         Lab ID: { item.trait[1].value }

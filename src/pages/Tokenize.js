@@ -14,11 +14,12 @@ const Tokenize = () => {
     var [clientName, setClientName] = useState('');
     var [birthdate, setBirthdate] = useState('');
     var [nameTest, setNameTest] = useState('');
-    var [nameLab, setNameLab] = useState('');
-    var [genolabTestCode, setGenolabTestCode] = useState('');  //publico
-    var [deliveryDate, setDeliveryDate] = useState('');       //publico
-    var [labID, setLabID] = useState(-1);                    //publico
+    var [testID, setTestID] = useState('');  //publico
+    var [availableDate, setAvailableDate] = useState('');       //publico
+    var [labID, setLabID] = useState('');                    //publico
     var [fileStatus, setFileStatus] = useState(false);
+    var [imageURL, setImageURL] = useState('');
+
     //
     var [viewingKey, setViewingKey] = useState('');
     var [loadingMint, setLoadingMint] = useState(false);
@@ -46,16 +47,16 @@ const Tokenize = () => {
           image: "",
           attributes: [
             {
-              "trait_type": "genolab_test_code",
-              "value": `${genolabTestCode}`
+              "trait_type": "test_id",
+              "value": `${testID}`
             },
             {
               "trait_type": "lab_id",
               "value": `${labID}`
             },
             {
-              "trait_type": "delivery_date",
-              "value": `${deliveryDate}`
+              "trait_type": "available_date",
+              "value": `${availableDate}`
             } 
          ] 
         }
@@ -108,66 +109,76 @@ const Tokenize = () => {
         <ContractsNav />
         <div className='sp' >
         <form>
-        <label>Genolab Test Code:  
-          <input
-            type="text" 
-            value={genolabTestCode}
-            onChange={(e) => setGenolabTestCode(e.target.value)}
-          />
-        </label>
+          <fieldset>
+            <p>Public Metadata:</p>
+          <form>
+          <label>Test ID:   
+            <input
+              type="text" 
+              value={testID}
+              onChange={(e) => setTestID(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>Lab ID:  
+            <input
+              type="text" 
+              value={labID}
+              onChange={(e) => setLabID(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>Available Date:  
+            <input
+              type="text" 
+              value={availableDate}
+              onChange={(e) => setAvailableDate(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>Image URL:  
+            <input
+              type="text" 
+              value={fileURL}
+              onChange={(e) => setFileURL(e.target.value)}
+            />
+          </label>
+        </form>
+        </fieldset>
       </form>
       <form>
-        <label>Lab ID:  
-          <input
-            type="text" 
-            value={labID}
-            onChange={(e) => setLabID(e.target.value)}
-          />
-        </label>
-      </form>
-      <form>
-        <label>Delivery Date:  
-          <input
-            type="text" 
-            value={deliveryDate}
-            onChange={(e) => setDeliveryDate(e.target.value)}
-          />
-        </label>
-      </form>
-      <form>
-        <label>Birthdate:  
-          <input
-            type="text" 
-            value={birthdate}
-            onChange={(e) => setBirthdate(e.target.value)}
-          />
-        </label>
-      </form>
-      <form>
-        <label>Client Name:  
-          <input
-            type="text" 
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
-          />
-        </label>
-      </form>
-      <form>
-        <label>Test Name:  
-          <input
-            type="text" 
-            value={nameTest}
-            onChange={(e) => setNameTest(e.target.value)}
-          />
-        </label>
-      </form>
-      <form>
-        <label>File:  
-          <input
-            type="file"
-            onChange={ipfsUpload}
-          />
-        </label>
+        <fieldset>
+          <p>Private Metadata: </p>
+        <form>
+          <label>Client Name:  
+            <input
+              type="text" 
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>Test Name:  
+            <input
+              type="text" 
+              value={nameTest}
+              onChange={(e) => setNameTest(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>File:  
+            <input
+              type="file"
+              onChange={ipfsUpload}
+            />
+          </label>
+        </form>
+        </fieldset>
       </form>
       <br></br>
       <p>
