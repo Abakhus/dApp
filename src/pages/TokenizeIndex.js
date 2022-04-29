@@ -18,11 +18,11 @@ const TokenizeIndex = () => {
         if(Laboratories){
             return(
                 <>
-                    <div className='sp' >
-                        <Button variant="contained"  className='cta-button mint-nft-button'>
+                    <div className="lab">
+                        <Button style={{ height: 43, width: 132 }} size="large" variant="contained"  className='cta-button mint-nft-button'>
                             Laudo
                         </Button>
-                        <Button variant="contained"  className='cta-button mint-nft-button'>
+                        <Button size="large" variant="contained"  className='cta-button mint-nft-button'>
                             Serviços
                         </Button>
                     </div>
@@ -31,16 +31,34 @@ const TokenizeIndex = () => {
         }
     }
 
+    const backHandler = async () =>{
+        setDataScience(false);
+        setLaboratories(false);
+    }
+
+    function BackButton() {
+        if(true){
+            return(
+                <>
+                    <div className='back' >                   
+                        <Button size="large" variant="contained" onClick={ ()=> { backHandler() }} className='cta-button mint-nft-button'>
+                            Voltar
+                        </Button>
+                    </div>
+                </>
+            )
+        }
+    }
 
     function DataScienceButton() {
         if(DataScience){
             return(
                 <>
-                    <div className='sp' >                   
-                        <Button variant="contained"  className='cta-button mint-nft-button'>
+                    <div className="ds" >                   
+                        <Button size="large" style={{ height: 43, width: 132 }} variant="contained"  className='cta-button mint-nft-button'>
                             Relátorios
                         </Button>
-                        <Button variant="contained"  className='cta-button mint-nft-button'>
+                        <Button size="large" variant="contained"  className='cta-button mint-nft-button'>
                             Serviços
                         </Button>
                     </div>
@@ -49,35 +67,44 @@ const TokenizeIndex = () => {
         }
     }
 
-    const LaboratoriesButtonHandler = async () =>{
-        setLaboratories(true);
-    }
-
     return(
         <>
-        <div className='sp' >
+        <div className='spmain' >
             {!Laboratories && !DataScience &&
             <>
-                <Button variant="contained" onClick={ ()=> { LaboratoriesButtonHandler() } } className='cta-button mint-nft-button'>
+                <Button size="large" variant="contained" onClick={ ()=> { setLaboratories(true) } } className='cta-button mint-nft-button'>
                     Laboratories
                 </Button>
             </>
             }
             {Laboratories &&
              <>
-             { labButton() }
+              <div className="tchoice">
+                <h2>LABORATÓRIOS</h2>
+            </div>
+             <div>
+                { BackButton() }
+                { labButton() }
+             </div>
              </> 
             }
             {!DataScience && !Laboratories &&
             <>
-                <Button variant="contained" onClick={ ()=> { setDataScience(true) } } className='cta-button mint-nft-button'>
+                <Button size="large" style={{ height: 50, width: 160 }} variant="contained" onClick={ ()=> { setDataScience(true) } } className='cta-button mint-nft-button'>
                     Data Science
                 </Button>
             </>
             }
             {DataScience &&
             <>
-            { DataScienceButton() }
+            <div className="tchoice">
+                <h2>DATA SCIENCE</h2>
+            </div>
+            <div>
+                
+                { BackButton() }
+                { DataScienceButton() }
+            </div>
             </>
             }
         </div>
