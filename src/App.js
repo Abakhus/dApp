@@ -4,7 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MyTokens from './pages/MyTokens'
-import Tokenize from './pages/Tokenize'
+import TokenizeIndex from './pages/TokenizeIndex'
 import Home from './pages'
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' exact element={<Home/>}/>
-          <Route path='/Tokenize' element={<Tokenize/>} />
+          <Route path='/TokenizeIndex' element={<TokenizeIndex/>} />
           <Route path='/MyTokens' element={<MyTokens/>} />
         </Routes>
       </Router>      

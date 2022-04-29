@@ -20,7 +20,7 @@ return (
 		<NavLink to='/Marketplace' activeStyle>
 			Marketplace
 		</NavLink>
-		<NavLink to='/Tokenize' activeStyle>
+		<NavLink to='/TokenizeIndex' activeStyle>
 			Tokenize
 		</NavLink>
 		<NavLink to='/MyTokens' activeStyle>

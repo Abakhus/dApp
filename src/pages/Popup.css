@@ -27,7 +27,7 @@
     font-family: arial;
     font-size: 24px;
     margin: px;
-    text-align: justify;
+    text-align: left;
     right: calc(40%);
     top: calc(15%);
     /* Setup */ 
@@ -63,7 +63,22 @@
     text-align: justify;
     font-size: 20px;
     position: fixed;
+    display: flex;
+    column-gap: 30px;
   }
+
+  .sp2 {
+    /* Center horizontally*/
+    
+    right: calc(40%);
+    top: calc(150px);
+    text-align: start;
+    font-size: 20px;
+    position: fixed;
+    display: flex;
+    column-gap: 30px;
+  }
+  
   
   .connect-wallet-button {
     background: rgb(32, 129, 226);

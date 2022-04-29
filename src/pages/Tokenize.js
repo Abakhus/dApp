@@ -3,7 +3,7 @@ import ContractsNav from './contracts/Navbar/ContractsNav';
 import { 
  onAccountAvailable,
  viewingKeyManager,
- }from '@stakeordie/griptape.js';
+ } from '@stakeordie/griptape.js';
  import Button from "@material-ui/core/Button";
  import { abkt } from './contracts/labReport';
  import { create } from 'ipfs-http-client'

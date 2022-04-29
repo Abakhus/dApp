@@ -27,7 +27,6 @@ function TokenList({ nftList }) {
 
             return (
                 <>
-                <br></br>
                 <div key={key}>
                 <Card
                 style={{
