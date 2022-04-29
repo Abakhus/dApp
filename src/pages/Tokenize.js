@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ContractsNav from './contracts/Navbar/ContractsNav';
 import { 
  onAccountAvailable,
  viewingKeyManager,
@@ -106,7 +105,6 @@ const Tokenize = () => {
     return (
         <>
         
-        <ContractsNav />
         <div className='sp' >
         <form>
           <fieldset>

@@ -1,6 +1,7 @@
 import Button from "@material-ui/core/Button";
 import React, { useState, useEffect } from 'react';
 import './Popup.css'
+import { Link } from "react-router-dom";
 
 //index contains the choices between contracts(token)
 //must have the main choice between Laboratório | Data Science
@@ -19,10 +20,10 @@ const TokenizeIndex = () => {
             return(
                 <>
                     <div className="lab">
-                        <Button style={{ height: 43, width: 132 }} size="large" variant="contained"  className='cta-button mint-nft-button'>
+                        <Button component={Link} to="/Tokenize" style={{ height: 43, width: 132 }} size="large" variant="contained"  className='cta-button mint-nft-button'>
                             Laudo
                         </Button>
-                        <Button size="large" variant="contained"  className='cta-button mint-nft-button'>
+                        <Button  size="large" variant="contained"  className='cta-button mint-nft-button'>
                             Serviços
                         </Button>
                     </div>
