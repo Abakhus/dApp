@@ -57,7 +57,7 @@ const TokenizeIndex = () => {
                 <>
                     <div className="ds" >                   
                         <Button size="large" style={{ height: 43, width: 132 }} variant="contained"  className='cta-button mint-nft-button'>
-                            Relátorios
+                            Relatórios
                         </Button>
                         <Button size="large" variant="contained"  className='cta-button mint-nft-button'>
                             Serviços

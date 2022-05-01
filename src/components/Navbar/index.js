@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 Nav,
 NavLink,
@@ -8,17 +8,28 @@ NavBtn,
 NavBtnLink,
 } from './NavbarElements';
 import WalletIcon from "@material-ui/icons/AccountBalanceWallet";
-import { onAccountAvailable } from '@stakeordie/griptape.js';
+import { onAccountAvailable, getAddress, bech32 } from '@stakeordie/griptape.js';
 import { Link as RouterLink } from "react-router-dom";
+
 //adicionar navegação dos contratos
 
 
 
 const Navbar = () => {
 	var [isConnected, setIsConnected] = useState(false);
-	onAccountAvailable(() => {
-		setIsConnected(true);
-	});	
+	var [address, setAddress] = useState('');
+
+	useEffect(() =>{
+		const acc = onAccountAvailable(() => {
+			setIsConnected(true);
+			setAddress(getAddress());
+		});
+		return () => {
+			acc();
+		}
+	}, []);
+
+
 return (
 	<>
 	<Nav>
@@ -42,15 +53,16 @@ return (
 		{!isConnected && 
 		<>	
 			<NavBtn>
-			<NavBtnLink to='#'> <WalletIcon style={{ height: 28, width: 42, margin: -8}}/> <strong>Connect Keplr Wallet</strong></NavBtnLink>
+			<NavBtnLink to='/'> <WalletIcon style={{ height: 22, width: 35, margin: -5 }}/>Connect Keplr Wallet</NavBtnLink>
 			</NavBtn>
 		</>
 		}
 		{isConnected && 
 		<>		
 			<NavBtn>
-				<NavBtnLink to='#'> <WalletIcon style={{ height: 28, width: 42, margin: -8}}/> <strong>Keplr is Connected</strong></NavBtnLink>
+				<NavBtnLink to='#'> <WalletIcon style={{ height: 22, width: 35, margin: -5 }}/> {bech32(address, 16)} </NavBtnLink>
 			</NavBtn>
+			
 		</>
 		}
 		

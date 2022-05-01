@@ -105,7 +105,9 @@ const Tokenize = () => {
     return (
         <>
         
-        <div className='sp' >
+        <div className='container' >
+          <strong>Mint Laudo Laboratorial Token</strong>
+          <hr></hr>
         <form>
           <fieldset>
             <p>Public Metadata:</p>

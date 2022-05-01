@@ -127,7 +127,6 @@ const MyTokens = () => {
 	return (
 		<>
 		<br></br>
-		<ContractsNav />
 		<div
 		style={{
 			display: 'flex',

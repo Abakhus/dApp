@@ -17,9 +17,9 @@ const Home = () => {
 		try{
 			setIsConnected(true);
 			bootstrap();
-			console.log(isConnected)
 		}
 		catch(err){
+			setIsConnected(false);
 			console.log(err);
 		}
 	}
