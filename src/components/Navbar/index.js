@@ -42,7 +42,7 @@ return (
 		<NavLink to='/TokenizeIndex' activeStyle>
 			<h3>Tokenize</h3>
 		</NavLink>
-		<NavLink to='/MyTokens' activeStyle>
+		<NavLink to='/MyTokensIndex' activeStyle>
 			<h3>My Tokens</h3>
 		</NavLink>
 		

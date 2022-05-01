@@ -56,7 +56,7 @@ const TokenizeIndex = () => {
             return(
                 <>
                     <div className="ds" >                   
-                        <Button size="large" style={{ height: 43, width: 132 }} variant="contained"  className='cta-button mint-nft-button'>
+                        <Button size="large" component={Link} to="/TokenizeAnalisys" style={{ height: 43, width: 132 }} variant="contained"  className='cta-button mint-nft-button'>
                             Relatórios
                         </Button>
                         <Button size="large" variant="contained"  className='cta-button mint-nft-button'>

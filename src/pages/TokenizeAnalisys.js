@@ -14,25 +14,29 @@ import {
   onAccountAvailable,
   viewingKeyManager,
   } from '@stakeordie/griptape.js';
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { create } from 'ipfs-http-client'
 import './Popup.css'
+import Button from "@material-ui/core/Button";
 
 //importando o contrato específico pra o mint da token
 import { genomic } from './contracts/AnalisysReport'
 
-const TokenizeGenomicAnalisys = () => {
+const TokenizeAnalisys = () => {
+
     //misc 
     var [loadingMint, setLoadingMint] = useState(false);
     var [isConnected, setIsConnected] = useState(false);
     const ipfsClient = create('https://ipfs.infura.io:5001/api/v0');
     var [fileStatus, setFileStatus] = useState(false);
-    
-    //public
+    var [viewingKey, setViewingKey] = useState('');
+
+    //public metadata
     var [bgImage, setBgImage] = useState(``);
     var [labID, setLabID] = useState('');
     var [reportID, setReportID] = useState('');
     var [releaseDate, setReleaseDate] = useState('');
-    //private
+    //private metadata
     var [fileURL, setFileURL] = useState(``);
 
     useEffect(() =>{
@@ -108,7 +112,9 @@ const TokenizeGenomicAnalisys = () => {
     }
 
     return (
-      <>      
+      <> 
+
+      
       <div className='container' >
         <strong>Mint Genomic Analisys Token</strong>
         <hr></hr>
@@ -180,4 +186,4 @@ const TokenizeGenomicAnalisys = () => {
   )
 
 }
-export default TokenizeGenomicAnalisys;
+export default TokenizeAnalisys;
