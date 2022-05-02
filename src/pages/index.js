@@ -7,7 +7,6 @@ import {
 
 import Button from "@material-ui/core/Button";
 import { abkt } from './contracts/labReport'
-import { create } from 'ipfs-http-client'
 
 const Home = () => {
 	const [isConnected, setIsConnected] = useState(false);
@@ -24,6 +23,55 @@ const Home = () => {
 		}
 	}
 
+	const defineKepler = async () => {
+		await window.keplr.experimentalSuggestChain({
+			chainId: "pulsar-2",
+			chainName: "Pulsar-2",
+			rpc: "http://testnet.securesecrets.org:26657",
+			rest: "http://testnet.securesecrets.org:1317",
+			bip44: {
+			  coinType: 529,
+			},
+			bech32Config: {
+			  bech32PrefixAccAddr: "secret",
+			  bech32PrefixAccPub: "secretpub",
+			  bech32PrefixValAddr: "secretvaloper",
+			  bech32PrefixValPub: "secretvaloperpub",
+			  bech32PrefixConsAddr: "secretvalcons",
+			  bech32PrefixConsPub: "secretvalconspub",
+			},
+			currencies: [
+			  {
+				coinDenom: "SCRT",
+				coinMinimalDenom: "uscrt",
+				coinDecimals: 6,
+				coinGeckoId: "secret",
+			  },
+			],
+			feeCurrencies: [
+			  {
+				coinDenom: "SCRT",
+				coinMinimalDenom: "uscrt",
+				coinDecimals: 6,
+				coinGeckoId: "secret",
+			  },
+			],
+			stakeCurrency: {
+			  coinDenom: "SCRT",
+			  coinMinimalDenom: "uscrt",
+			  coinDecimals: 6,
+			  coinGeckoId: "secret",
+			},
+			coinType: 529,
+			gasPriceStep: {
+			  low: 0.1,
+			  average: 0.25,
+			  high: 1,
+			},
+			features: ["secretwasm", "stargate", "ibc-transfer", "ibc-go"],
+		  });
+	}
+
 	useEffect(() => {
 		const removeOnAccountAvailable = onAccountAvailable (() => { //setar viewing key caso já exista
 			setIsConnected(true);
@@ -34,6 +82,7 @@ const Home = () => {
 		})
 		
 		return () => {
+			
 			removeOnAccountAvailable();
 		}
 	  }, []);
@@ -45,13 +94,18 @@ const Home = () => {
 			display: 'flex',
 			justifyContent: 'Center',
 			alignItems: 'Top',
-			height: '100vh'
+			height: '100vh',
 		}}
 		className='main-app'>
 			<div className='main-app'>
 				<div>
 				<Button variant="contained" onClick={ connectWalletHandler } disabled={isConnected} className='cta-button connect-wallet-button'>
 					{isConnected ? "Wallet Set" : "Connect Wallet"}
+				</Button>
+				<br></br>
+				<br></br>
+				<Button variant="contained" onClick={ defineKepler } disabled={isConnected} className='cta-button connect-wallet-button'>
+					Add Testnet [Pulsar 2]
 				</Button>
 				</div>
 	   		</div>
