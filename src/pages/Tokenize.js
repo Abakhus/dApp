@@ -8,14 +8,36 @@ import {
  import { create } from 'ipfs-http-client'
  import './Popup.css'
 
+/*
+Requisitos:
+    • Metadados públicos:
+        ◦ Código do laboratório.
+        ◦ Código do exame (não será o nome do exame, mas um código interno do laboratório).
+        ◦ Data da liberação do resultado pelo laboratório (não é, obrigatoriamente, a data da criação do token).
+        ◦ URL para a imagem de capa do token, caso exista (exemplo: máquina de PCR, ...).
+    • Metadados privados:
+        ◦ Nome do cliente do laboratório.
+        ◦ URL do laudo do exame (pdf ou imagem).
+        ◦ Nome do exame realizado.
+    • O token deve possuir a funcionalidade de compartilhamento temporário. Isso significa que o dono do token poderá compartilhar por tempo determinado (horas ou dias) o conteúdo privado para alguma outra carteira.
+
+*/
+
+
 const Tokenize = () => {
+    //private metadata
     var [fileURL, setFileURL] = useState(``);
     var [clientName, setClientName] = useState('');
     var [birthdate, setBirthdate] = useState('');
     var [nameTest, setNameTest] = useState('');
-    var [testID, setTestID] = useState('');  //publico
-    var [availableDate, setAvailableDate] = useState('');       //publico
-    var [labID, setLabID] = useState('');                    //publico
+
+    //public metadata
+    var [bgImage, setBgImage] = useState(``);
+    var [labID, setLabID] = useState('');
+    var [reportID, setReportID] = useState('');
+    var [releaseDate, setReleaseDate] = useState('');
+
+    //misc
     var [fileStatus, setFileStatus] = useState(false);
     var [imageURL, setImageURL] = useState('');
 
@@ -42,20 +64,20 @@ const Tokenize = () => {
         var date = Date.now(); 
         const extension = {
           name: "",
-          description: "",
+          description: "laboratory",
           image: "",
           attributes: [
             {
-              "trait_type": "test_id",
-              "value": `${testID}`
+              "trait_type": "report_id",
+              "value": `${reportID}`
             },
             {
               "trait_type": "lab_id",
               "value": `${labID}`
             },
             {
-              "trait_type": "available_date",
-              "value": `${availableDate}`
+              "trait_type": "release_date",
+              "value": `${releaseDate}`
             } 
          ] 
         }
@@ -112,16 +134,7 @@ const Tokenize = () => {
           <fieldset>
             <p>Public Metadata:</p>
           <form>
-          <label>Test ID:   
-            <input
-              type="text" 
-              value={testID}
-              onChange={(e) => setTestID(e.target.value)}
-            />
-          </label>
-        </form>
-        <form>
-          <label>Lab ID:  
+          <label>Laboratory ID:   
             <input
               type="text" 
               value={labID}
@@ -130,11 +143,20 @@ const Tokenize = () => {
           </label>
         </form>
         <form>
-          <label>Available Date:  
+          <label>Report ID:  
             <input
               type="text" 
-              value={availableDate}
-              onChange={(e) => setAvailableDate(e.target.value)}
+              value={reportID}
+              onChange={(e) => setReportID(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>Release Date:  
+            <input
+              type="text" 
+              value={releaseDate}
+              onChange={(e) => setReleaseDate(e.target.value)}
             />
           </label>
         </form>

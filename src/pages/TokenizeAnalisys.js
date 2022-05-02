@@ -58,7 +58,8 @@ const TokenizeAnalisys = () => {
         const extension = {
           //public metadata
             name: "",
-            description: "",
+            //by setting a description defining the token type, we can use as a conditional parameter to further logic.
+            description: "genomic",
             image: "",
             attributes: [
             {

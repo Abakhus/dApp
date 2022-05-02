@@ -24,13 +24,10 @@ function TokenList({ nftList }) {
                 relatoryURL : ""
             }
 
-            
+
 
             if(item.description = "genomic"){
-                const genomicToken = { 
-                    reportID=`${item.trait[1].value}` 
-                    
-                }
+                
             }
             const popup = async () =>{
                 if(pdata){
