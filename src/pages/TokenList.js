@@ -14,7 +14,24 @@ function TokenList({ nftList }) {
             //console.log(key);
             var [alt, setAlt] = useState(150);
             var [pdata, setPdata] = useState(false);
+            var [tokenType, setTokenType] = useState('');
+            console.log(item.description)
 
+            const genomicToken = {
+                reportID : "",
+                labID : "",
+                releaseDate : "",
+                relatoryURL : ""
+            }
+
+            
+
+            if(item.description = "genomic"){
+                const genomicToken = { 
+                    reportID=`${item.trait[1].value}` 
+                    
+                }
+            }
             const popup = async () =>{
                 if(pdata){
                     setPdata(false);
