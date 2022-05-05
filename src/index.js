@@ -7,6 +7,7 @@ import {
   getKeplrAccountProvider
 } from '@stakeordie/griptape.js';
 
+//caso for usar a pulsar-2 mudar a restUrl pra umas das 3 opções
 const restUrl = 'http://20.226.15.33:1317';
 //http://testnet.securesecrets.org:1317/
 //https://api.pulsar.griptapejs.com
