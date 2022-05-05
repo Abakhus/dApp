@@ -141,48 +141,57 @@ import {
           <fieldset>
             <p>Public Metadata:</p>
           <form>
-          <label>Laboratory ID:   
+          <label>Service Name:   
             <input
               type="text" 
-              value={labID}
+              value={serviceName}
               onChange={(e) => setLabID(e.target.value)}
             />
           </label>
         </form>
         <form>
-          <label>Report ID:  
+          <label>Service description:  
             <input
               type="text" 
-              value={reportID}
+              value={serviceDescription}
               onChange={(e) => setReportID(e.target.value)}
             />
           </label>
         </form>
         <form>
-          <label>Release Date:  
+          <label>Service Type:  
             <input
               type="text" 
-              value={releaseDate}
+              value={serviceType}
               onChange={(e) => setReleaseDate(e.target.value)}
             />
           </label>
         </form>
-        {/* <form>
-          <label>Image URL:  
+        <form>
+          <label>Expire Date:  
+            <input
+              type="text" 
+              value={expireDate}
+              onChange={(e) => setExpireDate(e.target.value)}
+            />
+          </label>
+        </form>
+         <form>
+          <label>Logo URL:  
             <input
               type="text" 
               value={fileURL}
               onChange={(e) => setFileURL(e.target.value)}
             />
           </label>
-        </form> */}
+        </form> 
         </fieldset>
       </form>
       <form>
         <fieldset>
           <p>Private Metadata: </p>
         <form>
-          <label>Report File:  
+          <label>Voucher File:  
             <input
               type="file"
               onChange={ipfsUpload}
@@ -192,6 +201,19 @@ import {
         </fieldset>
       </form>
       <br></br>
+      <form>
+        <fieldset>
+          <p>Token Price: </p>
+        <form>
+          <label>Value in SCRT:  
+            <input
+              type="text"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </label>
+        </form>
+        </fieldset>
+      </form>
       <p>
       <Button variant="contained" onClick={ () => { mint(); } } disabled={ !fileStatus } className='cta-button mint-nft-button'>
         {loadingMint ? 'Minting...' : 'Mint'}

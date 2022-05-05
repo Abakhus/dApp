@@ -47,6 +47,7 @@ import {
       var [dbType, setDBType] = useState('');
       var [dbFormat, setDBFormat] = useState('');
       var [price, setPrice] = useState('');
+      var [royaltie, setRoyaltie] = useState('');
       //private metadata
       var [fileURL, setFileURL] = useState(``);
   
@@ -146,25 +147,34 @@ import {
           <fieldset>
             <p>Public Metadata:</p>
           <form>
-          <label>Laboratory ID:   
+          <label>Data Base Name:   
             <input
               type="text" 
-              value={labID}
-              onChange={(e) => setLabID(e.target.value)}
+              value={dataBase}
+              onChange={(e) => setDataBase(e.target.value)}
             />
           </label>
         </form>
         <form>
-          <label>Report ID:  
+          <label>Data Base description:  
             <input
               type="text" 
-              value={reportID}
-              onChange={(e) => setReportID(e.target.value)}
+              value={dbDescription}
+              onChange={(e) => setDBDescription(e.target.value)}
             />
           </label>
         </form>
         <form>
-          <label>Release Date:  
+          <label>DB Size:  
+            <input
+              type="text" 
+              value={dbSize}
+              onChange={(e) => setD(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>Paper URL:  
             <input
               type="text" 
               value={releaseDate}
@@ -172,6 +182,25 @@ import {
             />
           </label>
         </form>
+        <form>
+          <label>DB Type:  
+            <input
+              type="text" 
+              value={dbType}
+              onChange={(e) => setDBType(e.target.value)}
+            />
+          </label>
+        </form>
+        <form>
+          <label>DB Format:  
+            <input
+              type="text" 
+              value={dbFormat}
+              onChange={(e) => setDBFormat(e.target.value)}
+            />
+          </label>
+        </form>
+        
         {/* <form>
           <label>Image URL:  
             <input
@@ -187,10 +216,24 @@ import {
         <fieldset>
           <p>Private Metadata: </p>
         <form>
-          <label>Report File:  
+          <label>Data Base File:  
             <input
-              type="file"
-              onChange={ipfsUpload}
+             type="file"
+             onChange={ipfsUpload}
+            />
+          </label>
+        </form>
+        </fieldset>
+      </form>
+      <br></br>
+      <form>
+        <fieldset>
+          <p>Royalties Information: </p>
+        <form>
+          <label>Royaltie Wallets:  
+            <input
+              type="text"
+              onChange={(e) => setRoyaltie(e.target.value)}
             />
           </label>
         </form>
