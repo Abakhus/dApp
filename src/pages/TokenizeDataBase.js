@@ -169,16 +169,7 @@ import {
             <input
               type="text" 
               value={dbSize}
-              onChange={(e) => setD(e.target.value)}
-            />
-          </label>
-        </form>
-        <form>
-          <label>Paper URL:  
-            <input
-              type="text" 
-              value={releaseDate}
-              onChange={(e) => setReleaseDate(e.target.value)}
+              onChange={(e) => setDBSize(e.target.value)}
             />
           </label>
         </form>
@@ -200,7 +191,15 @@ import {
             />
           </label>
         </form>
-        
+        <form>
+          <label>Token Price SCRT:  
+            <input
+              type="text" 
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </label>
+        </form>
         {/* <form>
           <label>Image URL:  
             <input

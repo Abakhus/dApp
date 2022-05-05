@@ -10,6 +10,11 @@ import Home from './pages'
 import TokenizeAnalisys from './pages/TokenizeAnalisys';
 import MyTokensIndex from './pages/MyTokensIndex';
 import MyGenomicTokens from './pages/MyGenomicTokens';
+import TokenizeUtility from './pages/TokenizeUtility';
+import TokenizePipeline from './pages/TokenizePipeline';
+import TokenizeDataBase from './pages/TokenizeDataBase';
+
+
 
 function App() {
 
@@ -24,6 +29,9 @@ function App() {
           <Route path='/MyTokensIndex' element={<MyTokensIndex/>} />
           <Route path='/Tokenize' element={<Tokenize/>} />
           <Route path='/TokenizeAnalisys' element={<TokenizeAnalisys/>} />
+          <Route path='/TokenizePipeline' element={<TokenizePipeline/>} />
+          <Route path='/TokenizeUtility' element={<TokenizeUtility/>} />
+          <Route path='/TokenizeDataBase' element={<TokenizeDataBase/>} />
         </Routes>
       </Router>      
   )

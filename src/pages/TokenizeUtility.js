@@ -106,7 +106,7 @@ import {
           //minting 
           setLoadingMint(true);
           try {
-            await dataBase.mintNft(null,null,{extension}, private_metadata );
+            await utility.mintNft(null,null,{extension}, private_metadata );
           } catch (e) {
             //how to behave when minting fails?
           } finally {
@@ -145,7 +145,7 @@ import {
             <input
               type="text" 
               value={serviceName}
-              onChange={(e) => setLabID(e.target.value)}
+              onChange={(e) => setServiceName(e.target.value)}
             />
           </label>
         </form>
@@ -154,7 +154,7 @@ import {
             <input
               type="text" 
               value={serviceDescription}
-              onChange={(e) => setReportID(e.target.value)}
+              onChange={(e) => setServiceDescription(e.target.value)}
             />
           </label>
         </form>
@@ -163,7 +163,7 @@ import {
             <input
               type="text" 
               value={serviceType}
-              onChange={(e) => setReleaseDate(e.target.value)}
+              onChange={(e) => setServiceType(e.target.value)}
             />
           </label>
         </form>
