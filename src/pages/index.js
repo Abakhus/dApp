@@ -23,7 +23,56 @@ const Home = () => {
 		}
 	}
 
-	const defineKepler = async () => {
+	const connectLocalHost = async () => {
+		await window.keplr.experimentalSuggestChain({
+			chainId: "secretdev-1",
+			chainName: "LocalSecret",
+			rpc: "http://localhost:26657",
+			rest: "http://localhost:1317",
+			bip44: {
+			  coinType: 529,
+			},
+			bech32Config: {
+			  bech32PrefixAccAddr: "secret",
+			  bech32PrefixAccPub: "secretpub",
+			  bech32PrefixValAddr: "secretvaloper",
+			  bech32PrefixValPub: "secretvaloperpub",
+			  bech32PrefixConsAddr: "secretvalcons",
+			  bech32PrefixConsPub: "secretvalconspub",
+			},
+			currencies: [
+			  {
+				coinDenom: "SCRT",
+				coinMinimalDenom: "uscrt",
+				coinDecimals: 6,
+				coinGeckoId: "secret",
+			  },
+			],
+			feeCurrencies: [
+			  {
+				coinDenom: "SCRT",
+				coinMinimalDenom: "uscrt",
+				coinDecimals: 6,
+				coinGeckoId: "secret",
+			  },
+			],
+			stakeCurrency: {
+			  coinDenom: "SCRT",
+			  coinMinimalDenom: "uscrt",
+			  coinDecimals: 6,
+			  coinGeckoId: "secret",
+			},
+			coinType: 529,
+			gasPriceStep: {
+			  low: 0.1,
+			  average: 0.25,
+			  high: 1,
+			},
+			features: ["secretwasm", "stargate", "ibc-transfer", "ibc-go"],
+		  });
+	}
+
+	const connectPulsarTestnet = async () => {
 		await window.keplr.experimentalSuggestChain({
 			chainId: "pulsar-2",
 			chainName: "Pulsar-2",
@@ -104,9 +153,15 @@ const Home = () => {
 				</Button>
 				<br></br>
 				<br></br>
-				<Button variant="contained" onClick={ defineKepler } disabled={isConnected} className='cta-button connect-wallet-button'>
+				<div style={ { gap: 20, display: "flex" }   }>
+				<Button variant="contained" onClick={ connectPulsarTestnet } disabled={isConnected} className='cta-button connect-wallet-button'>
 					Add Testnet [Pulsar 2]
 				</Button>
+				
+				<Button variant="contained" onClick={ connectLocalHost } disabled={isConnected} className='cta-button connect-wallet-button'>
+					Add Testnet [Local Testnet]
+				</Button>
+				</div>
 				</div>
 	   		</div>
 		</div>
