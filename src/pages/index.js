@@ -159,7 +159,7 @@ const Home = () => {
 				</Button>
 				
 				<Button variant="contained" onClick={ connectLocalHost } disabled={isConnected} className='cta-button connect-wallet-button'>
-					Add Testnet [Local Testnet]
+					Add Testnet [Abakhus Testnet]
 				</Button>
 				</div>
 				</div>
