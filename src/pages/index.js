@@ -26,9 +26,9 @@ const Home = () => {
 	const connectLocalHost = async () => {
 		await window.keplr.experimentalSuggestChain({
 			chainId: "secretdev-1",
-			chainName: "LocalSecret",
-			rpc: "http://localhost:26657",
-			rest: "http://localhost:1317",
+			chainName: "abkTestChain",
+			rpc: "http://20.226.15.33:26657",
+			rest: "http://20.226.15.33:1317",
 			bip44: {
 			  coinType: 529,
 			},
