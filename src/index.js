@@ -8,11 +8,11 @@ import {
 } from '@stakeordie/griptape.js';
 
 //caso for usar a pulsar-2 mudar a restUrl pra umas das 3 opções
-const restUrl = 'http://20.226.15.33:1317';
+const restUrl = 'http://20.226.15.33:1317/';
 //http://testnet.securesecrets.org:1317/
 //https://api.pulsar.griptapejs.com
 //https://rpc.pulsar.griptapejs.com:443/
-
+//http://20.226.15.33:1317/'
 const provider = getKeplrAccountProvider();
 
 function runApp() {
