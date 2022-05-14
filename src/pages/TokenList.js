@@ -6,17 +6,18 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 
-function TokenList({ nftList }) {
+function TokenList({ nftList }, tokenType='') {
 
     function mapTokens() {
+       
         return nftList.map((item,key) => {
             //console.log(item);
             //console.log(key);
             var [alt, setAlt] = useState(150);
             var [pdata, setPdata] = useState(false);
-            var [tokenType, setTokenType] = useState('');
-            console.log(item.description)
-            setTokenType(item.description);
+            //console.log(item.description)
+            //console.log(tokenType.value)
+            //setTokenType(item.description);
 
             const genomicToken = {
                 reportID : "",
@@ -41,7 +42,7 @@ function TokenList({ nftList }) {
             if(tokenType = "laboratory"){
                
             }else if(tokenType = "genomic"){
-                
+
             }else if(tokenType = "dataBase"){
 
             }else if(tokenType = "pipeline"){
@@ -50,16 +51,8 @@ function TokenList({ nftList }) {
 
             }
 
-            const printD = async() =>{
-                return (
-                    <>
-                    
-                    </>
-                )
-            }
-
-            return (
-                <>
+            const printD = async() => {
+                return(
                 <div key={key}>
                 <Card
                 style={{
@@ -102,8 +95,17 @@ function TokenList({ nftList }) {
                     </CardContent>
                 </Card>
                   <br></br>
-                </div>
-                </>
+                </div>                          
+                )
+            }
+
+            return (
+                <>
+                {item.description == "laboratory" &&
+                 printD
+                }
+
+              </>
             );
         });
     }
