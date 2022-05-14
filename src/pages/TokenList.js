@@ -4,12 +4,17 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
+import { useLocation } from 'react-router-dom';
 
 function TokenList({ nftList }, tokenType='') {
 
     function mapTokens() {
-       
+
+        const location = useLocation();
+        console.log(location.pathname);
+
+        
+
         return nftList.map((item,key) => {
             //console.log(item);
             //console.log(key);
@@ -115,7 +120,10 @@ function TokenList({ nftList }, tokenType='') {
 
             return (
                 <>
-                {item.description == "laboratory" &&
+                {item.description == "laboratory" && location.pathname == "/MyTokens" &&
+                 <PrintD />
+                }
+                {item.description == "genomic" && location.pathname == "/MyGenomicTokens" &&
                  <PrintD />
                 }
 
