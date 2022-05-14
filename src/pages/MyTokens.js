@@ -161,7 +161,7 @@ const MyTokens = () => {
 		</div>
 		<div className='wrapper'>
 			<div className='box'>
-				{ rdy ? <TokenList nftList={tokens} /> : "" }
+				{ rdy ? <TokenList nftList={tokens} tokenType="laboratory" /> : "" }
 			</div>
 		</div>
 		

@@ -159,7 +159,7 @@ const MyGenomicTokens = () => {
 		</div>
 		<div className='wrapper'>
 			<div className='box'>
-				{ rdy ? <TokenList nftList={tokens} /> : "" }
+				{ rdy ? <TokenList nftList={tokens} tokenType="genomic" /> : "" }
 			</div>
 		</div>
 		
