@@ -16,19 +16,15 @@ function TokenList({ nftList }) {
             var [pdata, setPdata] = useState(false);
             var [tokenType, setTokenType] = useState('');
             console.log(item.description)
+            setTokenType(item.description);
 
             const genomicToken = {
                 reportID : "",
                 labID : "",
                 releaseDate : "",
                 relatoryURL : ""
-            }
-
-
-
-            if(item.description = "genomic"){
-                
-            }
+            }            
+            
             const popup = async () =>{
                 if(pdata){
                     setPdata(false);
@@ -37,6 +33,29 @@ function TokenList({ nftList }) {
                     setPdata(true);
                     setAlt(240);
                 }
+            }
+
+
+            //pra leitura de forma generica das tokens, fazer o parse pelo tipo
+            // laboratory, genomic, dataBase, pipeline, utility
+            if(tokenType = "laboratory"){
+               
+            }else if(tokenType = "genomic"){
+                
+            }else if(tokenType = "dataBase"){
+
+            }else if(tokenType = "pipeline"){
+
+            }else{
+
+            }
+
+            const printD = async() =>{
+                return (
+                    <>
+                    
+                    </>
+                )
             }
 
             return (
