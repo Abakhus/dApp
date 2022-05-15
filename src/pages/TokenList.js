@@ -55,26 +55,8 @@ function TokenList({ nftList }, tokenType='') {
             }else{
 
             }
-            
-                function ListItem(props) {
-                 // Correct! There is no need to specify the key here:
-                    return <li>{props.value}</li>;
-                }
 
-                function NumberList(props) {
-                    const numbers = props.numbers;
-                    const listItems = numbers.map((number) =>
-                        // Correct! Key should be specified inside the array.
-                        <ListItem key={number.toString()} value={number} />
-                );
-
-                return (
-                    <ul>
-                    {listItems}
-                    </ul>
-                );
-                }
-
+            // FAZER O MESMO PARA DADOS PRIVADOS
             function RenderPData(){
                 var datas = [];
                 for(var i = 0; i < item.trait.length; i++){
@@ -95,9 +77,7 @@ function TokenList({ nftList }, tokenType='') {
                         nft
                         )}
                     </div>
-                )
-                
-                
+                )               
             }
             
             function PublicMetadata(){
@@ -106,7 +86,6 @@ function TokenList({ nftList }, tokenType='') {
                     <>
                     {  /*console.log(item.trait.length) --> quantidade de metadados publicos*/}
                     {  /*console.log(item.privateExtension.length) --> quantidade de metadados privados*/}
-
                     <div>
                         <NftCard>                                           
                             <RenderPData/>
