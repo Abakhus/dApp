@@ -49,11 +49,55 @@ function TokenList({ nftList }, tokenType='') {
             }else if(tokenType = "genomic"){
 
             }else if(tokenType = "dataBase"){
-
+               
             }else if(tokenType = "pipeline"){
 
             }else{
 
+            }
+            
+                function ListItem(props) {
+                 // Correct! There is no need to specify the key here:
+                    return <li>{props.value}</li>;
+                }
+
+                function NumberList(props) {
+                    const numbers = props.numbers;
+                    const listItems = numbers.map((number) =>
+                        // Correct! Key should be specified inside the array.
+                        <ListItem key={number.toString()} value={number} />
+                );
+
+                return (
+                    <ul>
+                    {listItems}
+                    </ul>
+                );
+                }
+            
+            function PublicMetadata(){
+                return(
+                    <div>
+                        <NftCard>
+                            <Typography key={key} >
+                                Test ID: { item.trait[0].value }
+                            </Typography>
+                        </NftCard>
+                    </div>
+                )
+            }
+
+
+            function NftCard(props){
+                return (                    
+                    <div key={key}>
+                        <Card>
+                            <CardContent>
+                                {props.children}key={key}
+                            </CardContent>
+                        </Card>
+                    </div>                    
+                )
             }
 
             function PrintD() {
@@ -107,10 +151,10 @@ function TokenList({ nftList }, tokenType='') {
             return (
                 <>
                 {item.description == "laboratory" && location.pathname == "/MyTokens" &&
-                 <PrintD />
+                 <PublicMetadata />
                 }
                 {item.description == "genomic" && location.pathname == "/MyGenomicTokens" &&
-                 <PrintD />
+                 <PublicMetadata />
                 }
 
               </>
