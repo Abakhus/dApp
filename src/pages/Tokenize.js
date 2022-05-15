@@ -68,15 +68,15 @@ const Tokenize = () => {
           image: "",
           attributes: [
             {
-              "trait_type": "report_id",
+              "trait_type": "Report ID",
               "value": `${reportID}`
             },
             {
-              "trait_type": "lab_id",
+              "trait_type": "LAB ID",
               "value": `${labID}`
             },
             {
-              "trait_type": "release_date",
+              "trait_type": "Release Date",
               "value": `${releaseDate}`
             } 
          ] 
@@ -84,16 +84,16 @@ const Tokenize = () => {
         const private_metadata = {
           extension : {
             attributes: [{
-              "trait_type": "birthdate",
+              "trait_type": "Birthdate",
               "value": `${birthdate}`
             },{
-              "trait_type": "client_name",
+              "trait_type": "Client Name",
               "value": `${clientName}`
             },{
-              "trait_type": "name_test",
+              "trait_type": "Test Name",
               "value": `${nameTest}`
             },{
-              "trait_type": "file",
+              "trait_type": "Report",
               "value": `${fileURL}`
             }]
           }

@@ -74,16 +74,45 @@ function TokenList({ nftList }, tokenType='') {
                     </ul>
                 );
                 }
+
+            function RenderPData(){
+                var datas = [];
+                for(var i = 0; i < item.trait.length; i++){
+                    datas[i] = 
+                    <Typography style={{ fontSize: 16 }}
+                    color="textPrimary"
+                    gutterBottom
+                    variant="body2"
+                    >
+                               <strong>{ item.trait[i].trait_type }</strong>: { item.trait[i].value }
+                    </Typography>             
+                }
+
+                return (
+                    <div>
+                        {console.log(datas.values)}
+                        {datas.map((nft) =>
+                        nft
+                        )}
+                    </div>
+                )
+                
+                
+            }
             
             function PublicMetadata(){
+                
                 return(
+                    <>
+                    {  /*console.log(item.trait.length) --> quantidade de metadados publicos*/}
+                    {  /*console.log(item.privateExtension.length) --> quantidade de metadados privados*/}
+
                     <div>
-                        <NftCard>
-                            <Typography key={key} >
-                                Test ID: { item.trait[0].value }
-                            </Typography>
+                        <NftCard>                                           
+                            <RenderPData/>
                         </NftCard>
                     </div>
+                    </>
                 )
             }
 
