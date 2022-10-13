@@ -1,6 +1,4 @@
-    @page { size: 8.5in 11in; margin: 1in } p { margin-bottom: 0.1in; direction: ltr; line-height: 115%; text-align: left; orphans: 2; widows: 2; background: transparent } a:link { color: #000080; so-language: zxx; text-decoration: underline }
-
-**Abakhus : a privacy-preserving protocol for health and life sciences data and services**
+##Abakhus : a privacy-preserving protocol for health and life sciences data and services**
 
   
 
