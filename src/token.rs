@@ -38,39 +38,19 @@ pub struct Metadata {
 pub struct Extension {
     /// url to the image
     pub image: Option<String>,
-    /// raw SVG image data (not recommended). Only use this if you're not including the image parameter
-    pub image_data: Option<String>,
-    /// url to allow users to view the item on your site
-    pub external_url: Option<String>,
     /// item description
     pub description: Option<String>,
     /// name of the item
     pub name: Option<String>,
     /// item attributes
     pub attributes: Option<Vec<Trait>>,
-    /// background color represented as a six-character hexadecimal without a pre-pended #
-    pub background_color: Option<String>,
-    /// url to a multimedia attachment
-    pub animation_url: Option<String>,
-    /// url to a YouTube video
-    pub youtube_url: Option<String>,
-    /// media files as specified on Stashh that allows for basic authenticatiion and decryption keys.
-    /// Most of the above is used for bridging public eth NFT metadata easily, whereas `media` will be used
-    /// when minting NFTs on Stashh
-    pub media: Option<Vec<MediaFile>>,
-    /// a select list of trait_types that are in the private metadata.  This will only ever be used
-    /// in public metadata
-    pub protected_attributes: Option<Vec<String>>,
     /// token subtypes used by Stashh for display groupings (primarily used for badges, which are specified
     /// by using "badge" as the token_subtype)
     pub token_subtype: Option<String>,
-    /// pdf_file used to replace IPFS
-    pub pdf_file: Option<Vec<u8>>,
-    /// list_marketplace
-    pub list_marketplace: Option<String>,
-    /// selling price
-    pub selling_price: Option<String>,
-
+    /// list in bazaar
+    pub is_listable: Option<String>,
+    /// price
+    pub price: Option<String>,
 }
 
 /// attribute trait
@@ -86,25 +66,3 @@ pub struct Trait {
     pub max_value: Option<String>,
 }
 
-/// media file
-#[derive(Serialize, Deserialize, JsonSchema, Clone, PartialEq, Debug, Default)]
-pub struct MediaFile {
-    /// file type
-    /// Stashh currently uses: "image", "video", "audio", "text", "font", "application"
-    pub file_type: Option<String>,
-    /// file extension
-    pub extension: Option<String>,
-    /// authentication information
-    pub authentication: Option<Authentication>,
-    /// url to the file.  Urls should be prefixed with `http://`, `https://`, `ipfs://`, or `ar://`
-    pub url: String,
-}
-
-/// media file authentication
-#[derive(Serialize, Deserialize, JsonSchema, Clone, PartialEq, Debug, Default)]
-pub struct Authentication {
-    /// either a decryption key for encrypted files or a password for basic authentication
-    pub key: Option<String>,
-    /// username used in basic authentication
-    pub user: Option<String>,
-}
